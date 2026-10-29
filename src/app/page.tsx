@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight, BadgeCheck, Clock, Quote } from "lucide-react";
 import {
@@ -14,6 +15,7 @@ import { domains } from "@/data/domains";
 import { catalogueStats, programByCode, programs } from "@/data/programs";
 import { sortedArticles } from "@/data/blog";
 import { CtaBand } from "@/components/cta-band";
+import { ImageBand } from "@/components/image-band";
 import { ProgramCard } from "@/components/program-card";
 import { DomainIcon, accentClasses } from "@/components/icons";
 import {
@@ -41,6 +43,21 @@ export default function HomePage() {
     <>
       {/* ───────────────────────────── Hero ───────────────────────────── */}
       <section className="relative overflow-hidden bg-esme-950 text-esme-100">
+        {/* Photo de campus en fond, très assombrie : elle apporte de la
+            matière sans jamais disputer la lisibilité au texte. */}
+        <Image
+          src="/photos/hero-campus.webp"
+          alt=""
+          aria-hidden
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-25"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-r from-esme-950 via-esme-950/95 to-esme-950/70"
+        />
         <div aria-hidden className="bg-grid absolute inset-0 opacity-70" />
         <div
           aria-hidden
@@ -245,8 +262,22 @@ export default function HomePage() {
                 <li key={domain.slug}>
                   <Link
                     href={`/domaines/${domain.slug}`}
-                    className="group flex h-full flex-col rounded-2xl border border-ink-200 bg-white p-7 shadow-card transition-all duration-300 ease-[var(--ease-out-soft)] hover:-translate-y-0.5 hover:border-esme-300 hover:shadow-lift"
+                    className="group flex h-full flex-col overflow-hidden rounded-2xl border border-ink-200 bg-white shadow-card transition-all duration-300 ease-[var(--ease-out-soft)] hover:-translate-y-0.5 hover:border-esme-300 hover:shadow-lift"
                   >
+                    <div className="relative aspect-[16/7] overflow-hidden">
+                      <Image
+                        src={domain.photo}
+                        alt={domain.photoAlt}
+                        fill
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                        className="object-cover transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.04]"
+                      />
+                      <div
+                        aria-hidden
+                        className="absolute inset-0 bg-gradient-to-t from-esme-950/55 to-transparent"
+                      />
+                    </div>
+                    <div className="flex flex-1 flex-col p-7">
                     <div className="flex items-start justify-between gap-4">
                       <span
                         className={`inline-flex h-11 w-11 items-center justify-center rounded-xl ${accent.chip}`}
@@ -273,6 +304,7 @@ export default function HomePage() {
                         aria-hidden
                       />
                     </p>
+                    </div>
                   </Link>
                 </li>
               );
@@ -349,6 +381,14 @@ export default function HomePage() {
           </div>
         </Container>
       </Section>
+
+      <ImageBand
+        src="/photos/band-collaboration.webp"
+        alt="Participants travaillant ensemble sur des indicateurs de performance énergétique"
+        eyebrow="Pédagogie active"
+        title="On n'apprend pas un métier en salle de cours"
+        lead="Études de cas réels, mises en situation, ateliers collaboratifs, travaux guidés sur poste et simulateurs : c'est la constante des 48 programmes."
+      />
 
       {/* ───────────────────── Engagement et méthode ────────────────────── */}
       <Section>

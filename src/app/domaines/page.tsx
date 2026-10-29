@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { domains } from "@/data/domains";
@@ -36,9 +37,18 @@ export default function DomainesPage() {
                 <li key={domain.slug}>
                   <Link
                     href={`/domaines/${domain.slug}`}
-                    className="group grid gap-8 rounded-3xl border border-ink-200 bg-white p-8 shadow-card transition-all duration-300 hover:border-esme-300 hover:shadow-lift lg:grid-cols-[1.4fr_1fr] lg:p-10"
+                    className="group grid gap-8 overflow-hidden rounded-3xl border border-ink-200 bg-white shadow-card transition-all duration-300 hover:border-esme-300 hover:shadow-lift lg:grid-cols-[1fr_1.4fr]"
                   >
-                    <div>
+                    <div className="relative min-h-56 overflow-hidden lg:min-h-full">
+                      <Image
+                        src={domain.photo}
+                        alt={domain.photoAlt}
+                        fill
+                        sizes="(min-width: 1024px) 40vw, 100vw"
+                        className="object-cover transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.04]"
+                      />
+                    </div>
+                    <div className="p-8 lg:py-10 lg:pr-10 lg:pl-0">
                       <div className="flex items-center gap-4">
                         <span
                           className={`inline-flex h-12 w-12 items-center justify-center rounded-xl ${accent.chip}`}
@@ -64,12 +74,12 @@ export default function DomainesPage() {
                           aria-hidden
                         />
                       </p>
-                    </div>
-                    <div className="rounded-2xl bg-ink-50 p-6">
-                      <p className="mb-3 text-[0.7rem] font-semibold tracking-[0.12em] text-ink-500 uppercase">
-                        Thématiques
-                      </p>
-                      <BulletList items={domain.themes.map((t) => t.name)} />
+                      <div className="mt-7 rounded-2xl bg-ink-50 p-6">
+                        <p className="mb-3 text-[0.7rem] font-semibold tracking-[0.12em] text-ink-500 uppercase">
+                          Thématiques
+                        </p>
+                        <BulletList items={domain.themes.map((t) => t.name)} />
+                      </div>
                     </div>
                   </Link>
                 </li>

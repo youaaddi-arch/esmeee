@@ -18,6 +18,10 @@ export type Domain = {
   themes: { name: string; description: string }[];
   accent: "teal" | "indigo" | "blue" | "rose";
   icon: "bolt" | "cog" | "chip" | "compass";
+  /** Visuel du domaine, sous /public/photos. */
+  photo: string;
+  /** Texte alternatif de ce visuel. */
+  photoAlt: string;
   catalogPage: number;
 };
 
@@ -64,6 +68,8 @@ export const domains: Domain[] = [
     ],
     accent: "teal",
     icon: "bolt",
+    photo: "/photos/domaine-energies.webp",
+    photoAlt: "Équipe projet analysant des données de production énergétique autour d'une maquette d'éolienne",
     catalogPage: 10,
   },
   {
@@ -88,6 +94,8 @@ export const domains: Domain[] = [
     ],
     accent: "indigo",
     icon: "cog",
+    photo: "/photos/domaine-industrie.webp",
+    photoAlt: "Machine de découpe numérique en fonctionnement dans un atelier de fabrication",
     catalogPage: 24,
   },
   {
@@ -117,6 +125,8 @@ export const domains: Domain[] = [
     ],
     accent: "blue",
     icon: "chip",
+    photo: "/photos/domaine-numerique.webp",
+    photoAlt: "Deux ingénieurs dans un laboratoire de robotique et de systèmes embarqués de l'ESME",
     catalogPage: 30,
   },
   {
@@ -161,6 +171,8 @@ export const domains: Domain[] = [
     ],
     accent: "rose",
     icon: "compass",
+    photo: "/photos/domaine-management.webp",
+    photoAlt: "Dirigeants réunis lors de la signature d'un partenariat entre l'ESME et une entreprise industrielle",
     catalogPage: 42,
   },
 ];

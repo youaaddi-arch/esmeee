@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import { notFound } from "next/navigation";
 import { domainBySlug, domains } from "@/data/domains";
 import { programs, upcomingModules } from "@/data/programs";
@@ -57,6 +58,19 @@ export default async function DomainPage({
       />
 
       <div className="relative overflow-hidden bg-esme-950 text-esme-100">
+        <Image
+          src={domain.photo}
+          alt=""
+          aria-hidden
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover opacity-30"
+        />
+        <div
+          aria-hidden
+          className="absolute inset-0 bg-gradient-to-r from-esme-950 via-esme-950/95 to-esme-950/65"
+        />
         <div aria-hidden className="bg-grid absolute inset-0 opacity-60" />
         <div
           aria-hidden

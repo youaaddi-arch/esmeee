@@ -6,6 +6,7 @@ import { catalogueStats } from "@/data/programs";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
+import { ImageBand } from "@/components/image-band";
 import {
   Badge,
   ButtonLink,
@@ -172,6 +173,14 @@ export default function EquipePage() {
           </ol>
         </Container>
       </Section>
+
+      <ImageBand
+        src="/photos/band-atelier.webp"
+        alt="Ingénieurs au travail dans un laboratoire de robotique et de systèmes embarqués de l’ESME"
+        eyebrow="Nos intervenants"
+        title="Ils exercent le métier qu’ils enseignent"
+        lead="Experts d’assurance du secteur énergétique, ingénieurs de bureau d’études, praticiens de l’IA et de la cybersécurité, dirigeants expérimentés, comédiens-formateurs."
+      />
 
       {/* Adossement à l’école */}
       <Section tone="ink">

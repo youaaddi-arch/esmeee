@@ -5,6 +5,7 @@ import { pedagogyStandards } from "@/data/team";
 import { Breadcrumbs } from "@/components/breadcrumbs";
 import { PageHero } from "@/components/page-hero";
 import { CtaBand } from "@/components/cta-band";
+import { ImageBand } from "@/components/image-band";
 import {
   BulletList,
   ButtonLink,
@@ -152,6 +153,15 @@ export default function ApprochePage() {
           </ol>
         </Container>
       </Section>
+
+      <ImageBand
+        src="/photos/band-atelier.webp"
+        alt="Travaux pratiques sur machines professionnelles dans un atelier de l’ESME"
+        eyebrow="Active learning"
+        title="Transformer les acquis en réflexes durables"
+        lead="Chaque formation se conclut par une évaluation individuelle des acquis, puis par un accompagnement destiné à faciliter la mise en pratique dans l’organisation."
+        height="sm"
+      />
 
       {/* Standards */}
       <Section tone="ink">

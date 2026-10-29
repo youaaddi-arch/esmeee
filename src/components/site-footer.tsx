@@ -15,7 +15,7 @@ export function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-[1.3fr_2.7fr]">
           <div>
             <Link href="/" className="inline-block text-white">
-              <EsmeLogo />
+              <EsmeLogo tone="light" />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-esme-100/70">
               {site.tagline}. {site.baseline} {catalogueStats.programCount}{" "}

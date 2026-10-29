@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Bolt, Cog, Cpu, Compass } from "lucide-react";
 import type { Domain } from "@/data/domains";
 
@@ -50,14 +51,38 @@ export const accentClasses: Record<
   },
 };
 
-export function EsmeLogo({ className }: { className?: string }) {
+export function EsmeLogo({
+  className,
+  tone = "dark",
+}: {
+  className?: string;
+  tone?: "dark" | "light";
+}) {
   return (
-    <span className={className}>
-      <span className="font-display text-xl leading-none font-bold tracking-tight">
-        ESME
-      </span>
-      <span className="mt-0.5 block text-[0.6rem] leading-none font-semibold tracking-[0.18em] uppercase opacity-80">
-        Executive Education
+    <span className={`flex items-center gap-3 ${className ?? ""}`}>
+      <Image
+        src="/brand/esme-mark.png"
+        alt="ESME"
+        width={512}
+        height={512}
+        priority
+        className="h-10 w-10 shrink-0 rounded-[0.35rem]"
+      />
+      <span className="flex flex-col leading-none">
+        <span
+          className={`font-display text-[0.95rem] font-bold tracking-tight ${
+            tone === "light" ? "text-white" : "text-esme-900"
+          }`}
+        >
+          Executive Education
+        </span>
+        <span
+          className={`mt-1 text-[0.6rem] font-semibold tracking-[0.16em] uppercase ${
+            tone === "light" ? "text-mint-300" : "text-esme-500"
+          }`}
+        >
+          Formation continue
+        </span>
       </span>
     </span>
   );
