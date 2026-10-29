@@ -16,6 +16,7 @@ const staticRoutes: {
   { path: "/domaines", priority: 0.8, changeFrequency: "monthly" },
   { path: "/formats", priority: 0.8, changeFrequency: "monthly" },
   { path: "/financement", priority: 0.8, changeFrequency: "monthly" },
+  { path: "/financement/simulateur", priority: 0.8, changeFrequency: "monthly" },
   { path: "/equipe-pedagogique", priority: 0.7, changeFrequency: "monthly" },
   { path: "/notre-approche", priority: 0.7, changeFrequency: "monthly" },
   { path: "/observatoire", priority: 0.7, changeFrequency: "yearly" },

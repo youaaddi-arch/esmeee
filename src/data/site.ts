@@ -186,6 +186,7 @@ export const footerNav = [
     links: [
       { href: "/formats", label: "Inter, intra et sur-mesure" },
       { href: "/financement", label: "Financement" },
+      { href: "/financement/simulateur", label: "Simulateur de financement" },
       { href: "/financement#qualiopi", label: "Certification Qualiopi" },
       { href: "/financement#accessibilite", label: "Accessibilité et handicap" },
     ],

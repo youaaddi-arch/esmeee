@@ -20,6 +20,7 @@ const mainPages = [
   { href: "/domaines", label: "Nos domaines" },
   { href: "/formats", label: "Formats : inter, intra, sur-mesure" },
   { href: "/financement", label: "Financer votre formation" },
+  { href: "/financement/simulateur", label: "Simulateur de financement" },
   { href: "/notre-approche", label: "Notre approche pédagogique" },
   { href: "/equipe-pedagogique", label: "Équipe pédagogique" },
   { href: "/observatoire", label: "Observatoire 2026" },

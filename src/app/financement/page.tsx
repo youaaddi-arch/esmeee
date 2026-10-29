@@ -66,11 +66,11 @@ export default function FinancementPage() {
         }
       >
         <div className="flex flex-wrap gap-3">
-          <ButtonLink href="#dispositifs" tone="secondary" size="lg">
-            Voir les {fundingRoutes.length} dispositifs
+          <ButtonLink href="/financement/simulateur" tone="secondary" size="lg">
+            Lancer le simulateur
           </ButtonLink>
-          <ButtonLink href="/devis" tone="outlineLight" size="lg">
-            Obtenir un devis
+          <ButtonLink href="#dispositifs" tone="outlineLight" size="lg">
+            Voir les {fundingRoutes.length} dispositifs
           </ButtonLink>
         </div>
       </PageHero>
