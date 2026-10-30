@@ -279,6 +279,80 @@ export const fundingRoutes: FundingRoute[] = [
     eligibility: "conditionnelle",
   },
   {
+    slug: "fse-plus",
+    name: "Fonds social européen +",
+    acronym: "FSE+",
+    audiences: ["entreprise"],
+    summary:
+      "Cofinancement européen des actions de formation, distribué en France par les OPCO et les Régions. Il ne se demande jamais seul : il vient abonder une action collective portée par un OPCO.",
+    covers: [
+      "Jusqu'à la moitié des coûts pédagogiques, selon les appels et les opérateurs",
+      "Des actions collectives construites par l'OPCO autour d'une thématique ou d'une filière",
+    ],
+    conditions: [
+      "S'inscrire dans une action collective ouverte par votre OPCO : une demande individuelle n'est pas recevable",
+      "L'organisme de formation doit être certifié Qualiopi",
+      "Sont exclues les formations obligatoires de sécurité ou réglementaires, les formations internes et, selon les appels, les formats asynchrones",
+    ],
+    steps: [
+      "Demandez à votre conseiller OPCO quelles actions collectives cofinancées sont ouvertes",
+      "Vérifiez que la thématique visée entre dans le périmètre de l'appel",
+      "Déposez le dossier dans le calendrier de l'appel, toujours avant le démarrage",
+    ],
+    caveat:
+      "La programmation 2021-2027 arrive à son terme et les principaux appels se sont clos à la mi-2026. Une réouverture dépend de chaque OPCO et se décide en début d'exercice.",
+    eligibility: "conditionnelle",
+    source: "fse.gouv.fr et appels à projets des OPCO",
+  },
+  {
+    slug: "contributions-conventionnelles",
+    name: "Contributions conventionnelles de branche",
+    audiences: ["entreprise"],
+    summary:
+      "Certaines branches ont instauré, par accord collectif, une contribution supplémentaire à la contribution légale. Elle alimente des enveloppes propres à la branche, souvent ouvertes au-delà du seuil de 50 salariés.",
+    covers: [
+      "Des actions fléchées par la branche, selon ses priorités",
+      "Selon les accords, une part du coût pédagogique au-delà des fonds mutualisés de droit commun",
+    ],
+    conditions: [
+      "Votre convention collective doit avoir institué une telle contribution",
+      "Les priorités et les barèmes sont fixés par la commission paritaire de la branche",
+      "Le décret n° 2026-259 du 8 avril 2026 organise le reversement trimestriel de ces contributions aux OPCO par France compétences",
+    ],
+    steps: [
+      "Vérifiez auprès de votre OPCO si votre branche a instauré une contribution conventionnelle",
+      "Demandez les priorités et le barème en vigueur pour l'exercice",
+      "Déposez la demande selon le circuit de la branche, avant le démarrage",
+    ],
+    caveat:
+      "C'est le levier le plus souvent oublié des entreprises de 50 salariés et plus, précisément celles que les fonds mutualisés du plan n'atteignent pas.",
+    eligibility: "conditionnelle",
+  },
+  {
+    slug: "versements-volontaires",
+    name: "Versements volontaires à un OPCO",
+    audiences: ["entreprise"],
+    summary:
+      "Au-delà de ses obligations, l'entreprise peut confier des sommes à un OPCO pour se constituer un budget formation géré, fléché et sécurisé d'un exercice sur l'autre.",
+    covers: [
+      "Les actions que vous décidez, dans le cadre de gestion convenu avec l'OPCO",
+      "La contrepartie exigée par certains dispositifs cofinancés, qui doit précisément être financée ainsi",
+    ],
+    conditions: [
+      "Ouvert quelle que soit la taille de l'entreprise",
+      "Les versements peuvent être adressés à un OPCO autre que celui dont relève l'entreprise",
+      "Ils sont suivis dans une section comptable distincte des contributions obligatoires",
+    ],
+    steps: [
+      "Cadrez le montant et l'horizon avec votre conseiller OPCO",
+      "Formalisez le versement et son affectation",
+      "Mobilisez-le au fil de vos actions, sans repasser par une instruction à chaque fois",
+    ],
+    caveat:
+      "Pertinent surtout à partir de 50 salariés, et quand un dispositif cofinancé exige une contrepartie.",
+    eligibility: "directe",
+  },
+  {
     slug: "accord-cadre",
     name: "Accord-cadre grands comptes",
     audiences: ["entreprise"],

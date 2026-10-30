@@ -30,10 +30,38 @@ export type Opco = {
   /** Branches et activités couvertes, pour la recherche. */
   sectors: string[];
   website: string;
+  /** Page où l'OPCO publie ses critères de prise en charge. */
+  criteresUrl: string;
+  /**
+   * Accessibilité de ces critères, constatée le 30 octobre 2026 :
+   * — "public" : barèmes consultables sans compte ;
+   * — "identifiant" : réservés aux adhérents connectés ;
+   * — "par-branche" : publiés par convention collective, en documents séparés.
+   */
+  criteresAcces: "public" | "identifiant" | "par-branche";
   /** Pertinence au regard de l'offre ESME Executive Education. */
   esmeRelevance: "forte" | "moyenne" | "faible";
   /** Ce que cet OPCO finance le plus volontiers, de notre expérience. */
   note?: string;
+  /** Dispositifs propres à l'OPCO, relevés sur ses pages publiques. */
+  dispositifs?: OpcoDispositif[];
+};
+
+/** Un dispositif publié par un OPCO, avec sa source et sa date de relevé. */
+export type OpcoDispositif = {
+  nom: string;
+  resume: string;
+  /** Taux de prise en charge publiés, par tranche d'effectif. */
+  taux?: { tranche: string; taux: string }[];
+  thematiques?: string[];
+  /** Exclusions explicites. */
+  exclusions?: string[];
+  /** Calendrier publié ; souvent propre à une campagne annuelle. */
+  calendrier?: string;
+  /** Mise en garde sur l'actualité du dispositif. */
+  vigilance?: string;
+  url: string;
+  releveLe: string;
 };
 
 export const opcos: Opco[] = [
@@ -64,8 +92,33 @@ export const opcos: Opco[] = [
       "maintenance industrielle",
     ],
     website: "https://www.opco2i.fr",
+    criteresUrl: "https://www.opco2i.fr/formation-et-financement/",
+    criteresAcces: "identifiant",
     esmeRelevance: "forte",
     note: "C'est l'OPCO de la majorité de nos clients en Énergies & Services et en Industrie. Il dispose d'enveloppes dédiées aux transitions énergétique et numérique.",
+    dispositifs: [
+      {
+        nom: "Transitions Industrie",
+        resume:
+          "Cofinancement de type FNE-Formation, porté avec le ministère du Travail, pour les formations liées aux transitions écologique et numérique des entreprises industrielles. Priorité aux TPE-PME ; tous les salariés sont éligibles sauf les alternants, avec une attention portée aux plus de 55 ans.",
+        taux: [
+          { tranche: "Moins de 50 salariés", taux: "70 %" },
+          { tranche: "50 à 250 salariés", taux: "60 %" },
+          { tranche: "Plus de 250 salariés", taux: "50 %" },
+        ],
+        thematiques: [
+          "Transition écologique : transition énergétique, gestion des ressources et des déchets, fonctions support R&D et achats",
+          "Transition numérique : fabrication additive, robotique, réalité virtuelle et augmentée, logiciels de conception, contrôle non destructif",
+        ],
+        exclusions: ["Aucune formation bureautique"],
+        calendrier:
+          "Prise en charge limitée à douze mois à compter de l'engagement du dossier. La campagne publiée porte un engagement au 31/12/2024, une réalisation au 31/12/2025 et un paiement au 30/06/2026.",
+        vigilance:
+          "L'enveloppe est passée de 75 M€ en 2023 à 21 M€ en 2024, pour cause de restrictions budgétaires. Les dates de la campagne publiée sont échues : demandez à votre conseiller si un nouveau millésime est ouvert. La contrepartie doit être financée par un versement volontaire ou par les fonds de branche.",
+        url: "https://www.opco2i.fr/formation-et-financement/subventions/transitions-industrie-solution-pour-accompagner-entreprises-industrielles-dans-leurs-evolutions/",
+        releveLe: "2026-10-30",
+      },
+    ],
   },
   {
     id: "atlas",
@@ -90,6 +143,8 @@ export const opcos: Opco[] = [
       "études et conseil",
     ],
     website: "https://www.opco-atlas.fr",
+    criteresUrl: "https://www.opco-atlas.fr/criteres-financement",
+    criteresAcces: "identifiant",
     esmeRelevance: "forte",
     note: "L'OPCO des bureaux d'études et des sociétés d'ingénierie, donc d'une large part de nos participants en Numérique et en management de projets.",
   },
@@ -113,6 +168,8 @@ export const opcos: Opco[] = [
       "chantier",
     ],
     website: "https://www.constructys.fr",
+    criteresUrl: "https://www.constructys.fr",
+    criteresAcces: "par-branche",
     esmeRelevance: "forte",
     note: "Concerné par nos modules photovoltaïque, efficacité énergétique des bâtiments, IA dans le BTP et pilotage des acteurs d'un projet de construction.",
   },
@@ -135,6 +192,8 @@ export const opcos: Opco[] = [
       "distribution de carburants",
     ],
     website: "https://www.opcomobilites.fr",
+    criteresUrl: "https://www.opcomobilites.fr",
+    criteresAcces: "par-branche",
     esmeRelevance: "moyenne",
     note: "Pertinent pour l'électrification des flottes, les infrastructures de recharge et le management de projets.",
   },
@@ -157,6 +216,8 @@ export const opcos: Opco[] = [
       "optique",
     ],
     website: "https://www.opcoep.fr",
+    criteresUrl: "https://www.opcoep.fr",
+    criteresAcces: "par-branche",
     esmeRelevance: "moyenne",
     note: "Concerne les cabinets d'architectes et de géomètres, ainsi que les artisans installateurs du secteur énergétique.",
   },
@@ -177,6 +238,8 @@ export const opcos: Opco[] = [
       "négoce",
     ],
     website: "https://www.lopcommerce.com",
+    criteresUrl: "https://www.lopcommerce.com",
+    criteresAcces: "par-branche",
     esmeRelevance: "faible",
   },
   {
@@ -198,6 +261,8 @@ export const opcos: Opco[] = [
       "facility management",
     ],
     website: "https://www.akto.fr",
+    criteresUrl: "https://www.akto.fr",
+    criteresAcces: "par-branche",
     esmeRelevance: "faible",
   },
   {
@@ -217,6 +282,8 @@ export const opcos: Opco[] = [
       "méthanisation agricole",
     ],
     website: "https://www.ocapiat.fr",
+    criteresUrl: "https://www.ocapiat.fr",
+    criteresAcces: "par-branche",
     esmeRelevance: "moyenne",
     note: "Concerné par nos modules sur la méthanisation et les énergies renouvelables en milieu agricole.",
   },
@@ -240,6 +307,8 @@ export const opcos: Opco[] = [
       "presse",
     ],
     website: "https://www.afdas.com",
+    criteresUrl: "https://www.afdas.com",
+    criteresAcces: "par-branche",
     esmeRelevance: "faible",
     note: "Couvre les télécommunications, parfois concernées par nos modules numériques et cybersécurité.",
   },
@@ -259,6 +328,8 @@ export const opcos: Opco[] = [
       "laboratoire d'analyses",
     ],
     website: "https://www.opco-sante.fr",
+    criteresUrl: "https://opco-sante.fr",
+    criteresAcces: "public",
     esmeRelevance: "faible",
     note: "Concerné par nos modules data center, efficacité énergétique des bâtiments et cybersécurité.",
   },
@@ -279,6 +350,8 @@ export const opcos: Opco[] = [
       "centre social",
     ],
     website: "https://www.uniformation.fr",
+    criteresUrl: "https://www.uniformation.fr",
+    criteresAcces: "par-branche",
     esmeRelevance: "moyenne",
     note: "Les bailleurs sociaux font appel à nos modules d'efficacité énergétique et de rénovation du bâtiment.",
   },
@@ -320,3 +393,9 @@ export function searchOpcos(query: string): Opco[] {
     .sort((a, b) => b.score - a.score)
     .map((s) => s.opco);
 }
+
+export const criteresAccesLabels: Record<Opco["criteresAcces"], string> = {
+  public: "Barèmes consultables en ligne",
+  identifiant: "Barèmes réservés aux adhérents connectés",
+  "par-branche": "Barèmes publiés par convention collective",
+};

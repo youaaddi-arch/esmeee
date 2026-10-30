@@ -34,7 +34,21 @@ import {
   type Pertinence,
   type Recommendation,
 } from "@/data/simulateur";
-import { opcoById, searchOpcos, type Opco, type OpcoId } from "@/data/opco";
+import {
+  criteresAccesLabels,
+  opcoById,
+  searchOpcos,
+  type Opco,
+  type OpcoId,
+} from "@/data/opco";
+import {
+  anneeLabels,
+  statutExplications,
+  statutLabels,
+  veille,
+  type AnneeFormation,
+  type Statut,
+} from "@/data/financement-actualite";
 import { ButtonLink, Button, cx } from "./ui";
 
 type Track = null | "entreprise" | "particulier";
@@ -58,6 +72,13 @@ const pertinenceStyles: Record<
     chip: "bg-ink-200 text-ink-600",
     Icon: XCircle,
   },
+};
+
+const statutStyles: Record<Statut, string> = {
+  ouvert: "bg-framboise-100 text-framboise-800",
+  "sous-reserve": "bg-amber-100 text-amber-900",
+  epuise: "bg-orange-100 text-orange-900",
+  ferme: "bg-ink-200 text-ink-700",
 };
 
 export function SimulateurFinancement() {
@@ -143,6 +164,7 @@ function CompanyFlow() {
   const [headcount, setHeadcount] = useState<Headcount | null>(null);
   const [context, setContext] = useState<CompanyContext | null>(null);
   const [opco, setOpco] = useState<OpcoId | null>(null);
+  const [annee, setAnnee] = useState<AnneeFormation>("2026");
   const [submitted, setSubmitted] = useState(false);
 
   const complete = size && headcount && context;
@@ -150,10 +172,10 @@ function CompanyFlow() {
     () =>
       complete
         ? sortRecommendations(
-            recommendForCompany({ size, headcount, context, opco }),
+            recommendForCompany({ size, headcount, context, opco, annee }),
           )
         : [],
-    [complete, size, headcount, context, opco],
+    [complete, size, headcount, context, opco, annee],
   );
 
   if (submitted && complete) {
@@ -165,6 +187,7 @@ function CompanyFlow() {
           companySizeLabels[size],
           headcountLabels[headcount],
           companyContextLabels[context],
+          anneeLabels[annee],
         ]}
         onReset={() => {
           setSubmitted(false);
@@ -213,6 +236,18 @@ function CompanyFlow() {
 
       <Question
         step={4}
+        label="Quand la formation se déroulerait-elle ?"
+        hint="L'exercice compte : les enveloppes sont annuelles, et les critères 2027 seront arrêtés en fin d'année 2026."
+      >
+        <Choices
+          options={Object.entries(anneeLabels)}
+          value={annee}
+          onChange={(v) => setAnnee(v as AnneeFormation)}
+        />
+      </Question>
+
+      <Question
+        step={5}
         label="Connaissez-vous votre OPCO ?"
         hint="Facultatif. Si vous l'ignorez, cherchez votre secteur ci-dessous : nous vous proposerons l'OPCO le plus probable, à confirmer auprès de votre service RH."
       >
@@ -244,6 +279,7 @@ function PersonFlow() {
   const [status, setStatus] = useState<PersonStatus | null>(null);
   const [goal, setGoal] = useState<PersonGoal | null>(null);
   const [employer, setEmployer] = useState<EmployerStance | null>(null);
+  const [annee, setAnnee] = useState<AnneeFormation>("2026");
   const [submitted, setSubmitted] = useState(false);
 
   const needsEmployer = status === "salarie-prive";
@@ -257,10 +293,11 @@ function PersonFlow() {
               status,
               goal,
               employer: needsEmployer ? employer! : "hors-sujet",
+              annee,
             }),
           )
         : [],
-    [complete, status, goal, employer, needsEmployer],
+    [complete, status, goal, employer, needsEmployer, annee],
   );
 
   if (submitted && complete) {
@@ -271,6 +308,7 @@ function PersonFlow() {
           personStatusLabels[status],
           personGoalLabels[goal],
           ...(needsEmployer && employer ? [employerStanceLabels[employer]] : []),
+          anneeLabels[annee],
         ]}
         onReset={() => {
           setSubmitted(false);
@@ -315,6 +353,17 @@ function PersonFlow() {
           />
         </Question>
       ) : null}
+
+      <Question
+        step={needsEmployer ? 4 : 3}
+        label="Quand la formation se déroulerait-elle ?"
+      >
+        <Choices
+          options={Object.entries(anneeLabels)}
+          value={annee}
+          onChange={(v) => setAnnee(v as AnneeFormation)}
+        />
+      </Question>
 
       <div className="border-t border-ink-200 pt-6">
         <Button size="lg" disabled={!complete} onClick={() => setSubmitted(true)}>
@@ -531,6 +580,9 @@ function Results({
               {opco.website.replace("https://www.", "")}
               <ExternalLink className="h-3.5 w-3.5" aria-hidden />
             </a>
+            <p className="mt-3 text-xs text-esme-100/60">
+              {criteresAccesLabels[opco.criteresAcces]}
+            </p>
             <p className="mt-4 flex items-start gap-2 border-t border-white/10 pt-4 text-xs leading-relaxed text-esme-100/60">
               <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" aria-hidden />
               Indication, pas une certitude : votre OPCO découle de votre
@@ -541,8 +593,88 @@ function Results({
         ) : null}
       </div>
 
+      {opco?.dispositifs?.length ? (
+        <div className="mt-6 space-y-4">
+          {opco.dispositifs.map((d) => (
+            <article
+              key={d.nom}
+              className="rounded-2xl border border-esme-200 bg-esme-50 p-6"
+            >
+              <p className="text-[0.7rem] font-semibold tracking-[0.12em] text-esme-600 uppercase">
+                Dispositif propre à {opco.name}
+              </p>
+              <h3 className="mt-2 text-lg font-semibold text-esme-900">{d.nom}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-ink-700">{d.resume}</p>
+
+              {d.taux?.length ? (
+                <dl className="mt-4 grid gap-3 sm:grid-cols-3">
+                  {d.taux.map((t) => (
+                    <div key={t.tranche} className="rounded-xl bg-white p-3">
+                      <dt className="text-xs text-ink-500">{t.tranche}</dt>
+                      <dd className="font-display text-xl font-semibold text-esme-700">
+                        {t.taux}
+                      </dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : null}
+
+              {d.thematiques?.length ? (
+                <div className="mt-4">
+                  <p className="mb-2 text-[0.7rem] font-semibold tracking-[0.12em] text-ink-500 uppercase">
+                    Thématiques couvertes
+                  </p>
+                  <ul className="space-y-1.5">
+                    {d.thematiques.map((t) => (
+                      <li key={t} className="flex gap-2.5 text-sm text-ink-600">
+                        <span
+                          aria-hidden
+                          className="mt-[0.5em] h-1.5 w-1.5 shrink-0 rounded-full bg-framboise-400"
+                        />
+                        {t}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              {d.exclusions?.length ? (
+                <p className="mt-3 text-sm text-ink-600">
+                  <span className="font-medium text-esme-900">Exclusions : </span>
+                  {d.exclusions.join(" · ")}
+                </p>
+              ) : null}
+
+              {d.calendrier ? (
+                <p className="mt-3 text-sm leading-relaxed text-ink-600">
+                  <span className="font-medium text-esme-900">Calendrier : </span>
+                  {d.calendrier}
+                </p>
+              ) : null}
+
+              {d.vigilance ? (
+                <p className="mt-4 flex items-start gap-2.5 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm leading-relaxed text-amber-900">
+                  <AlertTriangle className="mt-0.5 h-4 w-4 shrink-0" aria-hidden />
+                  <span>{d.vigilance}</span>
+                </p>
+              ) : null}
+
+              <a
+                href={d.url}
+                target="_blank"
+                rel="noreferrer noopener"
+                className="mt-4 inline-flex items-center gap-1.5 text-sm font-medium text-esme-600 hover:underline"
+              >
+                La page officielle du dispositif
+                <ExternalLink className="h-3.5 w-3.5" aria-hidden />
+              </a>
+            </article>
+          ))}
+        </div>
+      ) : null}
+
       <ul className="mt-6 space-y-4">
-        {recos.map(({ route, pertinence, reason }) => {
+        {recos.map(({ route, pertinence, reason, statut, actualite, source }) => {
           const style = pertinenceStyles[pertinence];
           return (
             <li
@@ -558,18 +690,53 @@ function Results({
                     </span>
                   ) : null}
                 </h3>
-                <span
-                  className={cx(
-                    "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium",
-                    style.chip,
-                  )}
-                >
-                  <style.Icon className="h-3.5 w-3.5" aria-hidden />
-                  {pertinenceLabels[pertinence]}
+                <span className="flex flex-wrap items-center gap-2">
+                  {statut ? (
+                    <span
+                      title={statutExplications[statut]}
+                      className={cx(
+                        "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium",
+                        statutStyles[statut],
+                      )}
+                    >
+                      {statutLabels[statut]}
+                    </span>
+                  ) : null}
+                  <span
+                    className={cx(
+                      "inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-xs font-medium",
+                      style.chip,
+                    )}
+                  >
+                    <style.Icon className="h-3.5 w-3.5" aria-hidden />
+                    {pertinenceLabels[pertinence]}
+                  </span>
                 </span>
               </div>
 
               <p className="mt-3 text-sm leading-relaxed text-ink-700">{reason}</p>
+
+              {actualite ? (
+                <p className="mt-3 rounded-xl bg-white/70 p-4 text-sm leading-relaxed text-ink-600 ring-1 ring-ink-200">
+                  <span className="font-medium text-esme-900">
+                    Où en est ce dispositif ?{" "}
+                  </span>
+                  {actualite}
+                  {source ? (
+                    <>
+                      {" "}
+                      <a
+                        href={source.url}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                        className="font-medium text-esme-600 underline"
+                      >
+                        {source.label}
+                      </a>
+                    </>
+                  ) : null}
+                </p>
+              ) : null}
 
               {pertinence !== "non-applicable" ? (
                 <div className="mt-5 border-t border-ink-200/70 pt-4">
@@ -616,7 +783,8 @@ function Results({
       </div>
 
       <p className="mt-6 text-xs leading-relaxed text-ink-500">
-        Ce simulateur oriente, il n&apos;engage pas. Aucun montant n&apos;est
+        Veille mise à jour le {veille.verifieeLeTexte}. Ce simulateur oriente,
+        il n&apos;engage pas. Aucun montant n&apos;est
         affiché : barèmes et critères sont révisés chaque année et relèvent du
         financeur. La seule règle valable partout : déposer le dossier avant le
         démarrage de la formation.

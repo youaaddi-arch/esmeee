@@ -1,5 +1,10 @@
 import { fundingRoutes, type FundingRoute } from "./financement";
 import type { OpcoId } from "./opco";
+import {
+  statutDispositif,
+  type AnneeFormation,
+  type Statut,
+} from "./financement-actualite";
 
 /**
  * Moteur d'orientation vers les dispositifs de financement.
@@ -24,11 +29,28 @@ export type Recommendation = {
   pertinence: Pertinence;
   /** Pourquoi ce dispositif ressort — ou pourquoi il est écarté. */
   reason: string;
+  /** État du dispositif pour l'année de formation retenue. */
+  statut?: Statut;
+  /** Ce que l'actualité impose de savoir pour cette année-là. */
+  actualite?: string;
+  source?: { label: string; url: string };
 };
+
+/** Complète une recommandation avec la veille de l'année visée. */
+function avecActualite(reco: Recommendation, annee: AnneeFormation): Recommendation {
+  const veille = statutDispositif(reco.route.slug);
+  if (!veille) return reco;
+  return {
+    ...reco,
+    statut: veille.statut[annee],
+    actualite: veille.note[annee],
+    source: veille.source,
+  };
+}
 
 /* ─────────────────────────────── Entreprise ─────────────────────────────── */
 
-export type CompanySize = "tpe" | "pe" | "eti" | "ge";
+export type CompanySize = "moins-11" | "11-49" | "50-249" | "250-plus";
 export type Headcount = "1-3" | "4-10" | "11-30" | "30+";
 export type CompanyContext =
   | "adaptation"
@@ -37,11 +59,15 @@ export type CompanyContext =
   | "recrutement";
 
 export const companySizeLabels: Record<CompanySize, string> = {
-  tpe: "Moins de 11 salariés",
-  pe: "11 à 49 salariés",
-  eti: "50 à 249 salariés",
-  ge: "250 salariés et plus",
+  "moins-11": "Moins de 11 salariés",
+  "11-49": "11 à 49 salariés",
+  "50-249": "50 à 249 salariés",
+  "250-plus": "250 salariés et plus",
 };
+
+/** Le seuil qui commande l'accès aux fonds mutualisés du plan. */
+export const sousLeSeuilDe50 = (size: CompanySize): boolean =>
+  size === "moins-11" || size === "11-49";
 
 export const headcountLabels: Record<Headcount, string> = {
   "1-3": "1 à 3 personnes",
@@ -63,6 +89,8 @@ export type CompanyInput = {
   headcount: Headcount;
   context: CompanyContext;
   opco: OpcoId | null;
+  /** L'année de déroulement change l'état des enveloppes. */
+  annee: AnneeFormation;
 };
 
 const route = (slug: string): FundingRoute => {
@@ -72,40 +100,63 @@ const route = (slug: string): FundingRoute => {
 };
 
 export function recommendForCompany(input: CompanyInput): Recommendation[] {
-  const { size, headcount, context } = input;
+  const { size, headcount, context, opco, annee } = input;
+  const petite = sousLeSeuilDe50(size);
   const recos: Recommendation[] = [];
 
   recos.push({
     route: route("plan-developpement-competences"),
     pertinence: "prioritaire",
     reason:
-      "C'est la voie la plus directe, quelle que soit votre situation : l'entreprise décide, inscrit et règle. Tout le reste vient en complément ou en remboursement.",
+      "La seule voie qui ne dépende d'aucune enveloppe ni d'aucun calendrier : l'entreprise décide, inscrit et règle. Tout le reste vient en complément ou en remboursement.",
   });
 
-  const smallCompany = size === "tpe" || size === "pe";
   recos.push({
     route: route("opco"),
-    pertinence: "prioritaire",
-    reason: smallCompany
-      ? "Avec moins de 50 salariés, vous relevez des publics prioritaires de votre OPCO : les niveaux de prise en charge y sont les plus favorables. À instruire avant toute dépense."
-      : "Au-delà de 50 salariés, la prise en charge est plus encadrée, mais votre branche peut disposer d'enveloppes conventionnelles ou thématiques. Un appel à votre conseiller OPCO coûte dix minutes et peut changer le plan de financement.",
+    pertinence: petite ? "prioritaire" : "possible",
+    reason: petite
+      ? "Sous le seuil de 50 salariés, les fonds mutualisés financent votre plan de développement des compétences. C'est le premier réflexe, et il se déclenche avant toute dépense."
+      : "Depuis la loi du 5 septembre 2018, les fonds mutualisés ne financent plus le plan au-delà de 50 salariés. Votre OPCO reste mobilisable sur les niveaux définis par votre branche et sur des cofinancements de projets spécifiques : l'appel à votre conseiller reste utile, mais n'en attendez pas une prise en charge de droit commun.",
+  });
+
+  // Les leviers qui prennent le relais au-delà du seuil de 50 salariés.
+  recos.push({
+    route: route("contributions-conventionnelles"),
+    pertinence: petite ? "possible" : "prioritaire",
+    reason: petite
+      ? "Si votre branche a instauré une contribution conventionnelle, elle s'ajoute aux fonds mutualisés et finance des actions fléchées par la commission paritaire."
+      : "C'est le levier le plus souvent ignoré des entreprises de votre taille, et précisément celui qui prend le relais des fonds mutualisés. Vérifiez si votre convention collective en a institué une.",
+  });
+
+  recos.push({
+    route: route("versements-volontaires"),
+    pertinence: petite ? "possible" : "prioritaire",
+    reason: petite
+      ? "Utile si vous voulez sécuriser un budget pluriannuel géré par l'OPCO, ou financer la contrepartie exigée par un dispositif cofinancé."
+      : "Exclu des fonds mutualisés du plan, vous pouvez néanmoins confier un budget à un OPCO — y compris un autre que le vôtre — pour le gérer et le flécher. C'est aussi par là que se finance la contrepartie des dispositifs cofinancés.",
   });
 
   if (context === "transformation" || context === "difficulte") {
     recos.push({
-      route: route("fne-formation"),
-      pertinence: "prioritaire",
+      route: route("fse-plus"),
+      pertinence: "possible",
       reason:
-        context === "difficulte"
-          ? "Le FNE-Formation vise précisément les entreprises en difficulté économique. Il s'instruit auprès de votre OPCO, sur des enveloppes annuelles limitées : déposez tôt."
-          : "Votre projet relève d'une mutation, ce qui est le cœur de cible du FNE-Formation — en particulier sur les transitions écologique et numérique. Il s'instruit auprès de votre OPCO.",
+        "Votre projet relève d'une mutation : c'est le terrain du cofinancement européen. Il ne se demande jamais seul, il abonde une action collective ouverte par votre OPCO — demandez lesquelles le sont.",
+    });
+    recos.push({
+      route: route("fne-formation"),
+      pertinence: "non-applicable",
+      reason:
+        opco === "opco2i"
+          ? "La ligne budgétaire nationale du FNE est fermée. OPCO 2i porte toutefois son propre cofinancement de type FNE, Transitions Industrie, détaillé plus bas : interrogez votre conseiller sur le millésime en cours."
+          : "La ligne budgétaire nationale du FNE est fermée. Certains OPCO portent des cofinancements de même nature sous leur propre nom : posez la question à votre conseiller.",
     });
   } else {
     recos.push({
       route: route("fne-formation"),
       pertinence: "non-applicable",
       reason:
-        "Le FNE-Formation suppose une mutation documentée ou une difficulté économique. Une montée en compétence sur le poste actuel n'y ouvre pas droit.",
+        "Le FNE supposait une mutation documentée ou une difficulté économique, et sa ligne budgétaire est de toute façon fermée.",
     });
   }
 
@@ -114,7 +165,7 @@ export function recommendForCompany(input: CompanyInput): Recommendation[] {
       route: route("france-travail"),
       pertinence: "prioritaire",
       reason:
-        "Vous recrutez : la préparation opérationnelle à l'emploi (POEI) finance la formation du candidat avant sa prise de poste. Il faut une promesse d'embauche ou un besoin de recrutement formalisé, et l'accord du conseiller avant le démarrage.",
+        "Vous recrutez : la préparation opérationnelle à l'emploi finance la formation du candidat avant sa prise de poste. Il faut une promesse d'embauche ou un besoin formalisé, et l'accord du conseiller avant tout démarrage.",
     });
   }
 
@@ -125,7 +176,7 @@ export function recommendForCompany(input: CompanyInput): Recommendation[] {
       reason:
         headcount === "30+"
           ? "À ce volume, un accord-cadre se justifie : conditions tarifaires liées aux volumes, sessions dédiées, facturation regroupée et pilotage commun."
-          : "Si ce besoin se répète d'une année sur l'autre, un accord-cadre pluriannuel devient intéressant.",
+          : "Si ce besoin se répète d'un exercice à l'autre, un accord-cadre pluriannuel sécurise vos conditions — utile alors que les financements publics se resserrent.",
     });
   }
 
@@ -133,17 +184,17 @@ export function recommendForCompany(input: CompanyInput): Recommendation[] {
     route: route("agefiph"),
     pertinence: "possible",
     reason:
-      "Si l'un des participants est bénéficiaire de l'obligation d'emploi, l'AGEFIPH peut compléter le financement de droit commun et couvrir la compensation du handicap en situation de formation.",
+      "Si l'un des participants est bénéficiaire de l'obligation d'emploi, l'AGEFIPH complète le droit commun et couvre la compensation du handicap en situation de formation.",
   });
 
   recos.push({
     route: route("cpf"),
     pertinence: "non-applicable",
     reason:
-      "Le CPF appartient au salarié et ne finance que des actions certifiantes enregistrées au RNCP ou au Répertoire spécifique. Nos modules délivrent une attestation de fin de formation : ils n'y sont pas éligibles.",
+      "Le CPF appartient au salarié et ne finance que des actions certifiantes enregistrées. Nos modules délivrent une attestation de fin de formation : ils n'y sont pas éligibles.",
   });
 
-  return recos;
+  return recos.map((r) => avecActualite(r, annee));
 }
 
 /* ─────────────────────────────── Particulier ────────────────────────────── */
@@ -186,10 +237,11 @@ export type PersonInput = {
   status: PersonStatus;
   goal: PersonGoal;
   employer: EmployerStance;
+  annee: AnneeFormation;
 };
 
 export function recommendForPerson(input: PersonInput): Recommendation[] {
-  const { status, goal, employer } = input;
+  const { status, goal, employer, annee } = input;
   const recos: Recommendation[] = [];
 
   if (status === "salarie-prive") {
@@ -264,7 +316,7 @@ export function recommendForPerson(input: PersonInput): Recommendation[] {
         : "Possible sur nos sessions inter-entreprises, mais à n'envisager qu'après avoir épuisé les autres voies : un salarié passe presque toujours par son employeur, un indépendant par son fonds d'assurance formation.",
   });
 
-  return recos;
+  return recos.map((r) => avecActualite(r, annee));
 }
 
 /** Ordre d'affichage : le plus actionnable d'abord. */
