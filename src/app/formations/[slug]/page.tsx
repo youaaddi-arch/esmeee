@@ -144,7 +144,7 @@ export default async function ProgramPage({
           <div className="grid gap-12 lg:grid-cols-[1.6fr_1fr]">
             <div>
               <div className="flex flex-wrap items-center gap-2.5">
-                <span className="rounded-md bg-mint-400 px-2.5 py-1 font-mono text-xs font-bold tracking-wide text-esme-950">
+                <span className="rounded-md bg-framboise-400 px-2.5 py-1 font-mono text-xs font-bold tracking-wide text-esme-950">
                   {program.code}
                 </span>
                 {domain ? (
@@ -165,8 +165,8 @@ export default async function ProgramPage({
                 {program.title}
               </h1>
 
-              <p className="mt-6 max-w-2xl border-l-2 border-mint-400 pl-5 text-lg leading-relaxed text-esme-100/85">
-                <span className="mb-1 block text-[0.7rem] font-semibold tracking-[0.14em] text-mint-300 uppercase">
+              <p className="mt-6 max-w-2xl border-l-2 border-framboise-400 pl-5 text-lg leading-relaxed text-esme-100/85">
+                <span className="mb-1 block text-[0.7rem] font-semibold tracking-[0.14em] text-framboise-300 uppercase">
                   Objectif général
                 </span>
                 {program.objective}
@@ -190,7 +190,7 @@ export default async function ProgramPage({
               {facts.map((fact) => (
                 <div key={fact.label} className="flex items-start gap-3">
                   <fact.icon
-                    className="mt-0.5 h-4 w-4 shrink-0 text-mint-400"
+                    className="mt-0.5 h-4 w-4 shrink-0 text-framboise-400"
                     strokeWidth={1.5}
                     aria-hidden
                   />
@@ -206,7 +206,7 @@ export default async function ProgramPage({
               ))}
               <div className="flex items-start gap-3 border-t border-white/10 pt-5">
                 <FileText
-                  className="mt-0.5 h-4 w-4 shrink-0 text-mint-400"
+                  className="mt-0.5 h-4 w-4 shrink-0 text-framboise-400"
                   strokeWidth={1.5}
                   aria-hidden
                 />
@@ -323,7 +323,7 @@ export default async function ProgramPage({
                   ))}
                 </ol>
                 {program.evaluation ? (
-                  <p className="mt-8 flex items-center gap-2.5 rounded-xl border border-mint-300 bg-mint-100/50 px-4 py-3 text-sm font-medium text-mint-800">
+                  <p className="mt-8 flex items-center gap-2.5 rounded-xl border border-framboise-300 bg-framboise-100/50 px-4 py-3 text-sm font-medium text-framboise-800">
                     <GraduationCap className="h-4 w-4" strokeWidth={1.5} aria-hidden />
                     {program.evaluation}
                   </p>
@@ -384,7 +384,7 @@ export default async function ProgramPage({
 
                 {program.highlights.length ? (
                   <div className="rounded-2xl bg-esme-900 p-6 text-esme-100">
-                    <h2 className="flex items-center gap-2 text-sm font-semibold tracking-[0.1em] text-mint-300 uppercase">
+                    <h2 className="flex items-center gap-2 text-sm font-semibold tracking-[0.1em] text-framboise-300 uppercase">
                       <Sparkles className="h-4 w-4" strokeWidth={1.5} aria-hidden />
                       Les +
                     </h2>
@@ -401,7 +401,7 @@ export default async function ProgramPage({
               <div className="rounded-2xl border border-ink-200 bg-white p-6 shadow-card">
                 <h2 className="flex items-center gap-2 text-sm font-semibold text-esme-900">
                   <BadgeCheck
-                    className="h-4 w-4 text-mint-600"
+                    className="h-4 w-4 text-framboise-600"
                     strokeWidth={1.5}
                     aria-hidden
                   />

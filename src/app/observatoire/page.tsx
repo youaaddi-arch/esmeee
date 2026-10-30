@@ -57,8 +57,8 @@ export default function ObservatoirePage() {
             ))}
           </dl>
 
-          <figure className="mt-14 max-w-3xl border-l-2 border-mint-400 pl-6">
-            <Quote className="h-5 w-5 text-mint-400" aria-hidden />
+          <figure className="mt-14 max-w-3xl border-l-2 border-framboise-400 pl-6">
+            <Quote className="h-5 w-5 text-framboise-400" aria-hidden />
             <blockquote className="mt-3">
               <p className="font-display text-2xl leading-snug font-medium text-esme-800">
                 Tous perçoivent l’ampleur des mutations en cours, mais

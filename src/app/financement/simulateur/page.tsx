@@ -134,7 +134,7 @@ export default function SimulateurPage() {
                 <div className="flex flex-wrap items-center gap-2">
                   <h3 className="font-semibold text-esme-900">{opco.name}</h3>
                   {opco.esmeRelevance === "forte" ? (
-                    <span className="rounded-full bg-mint-100 px-2 py-0.5 text-[0.65rem] font-medium text-mint-800">
+                    <span className="rounded-full bg-framboise-100 px-2 py-0.5 text-[0.65rem] font-medium text-framboise-800">
                       Fréquent chez nos clients
                     </span>
                   ) : null}

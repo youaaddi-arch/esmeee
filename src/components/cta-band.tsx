@@ -16,7 +16,7 @@ export function CtaBand({
       <div aria-hidden className="bg-grid absolute inset-0 opacity-60" />
       <div
         aria-hidden
-        className="absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-mint-400/10 blur-3xl"
+        className="absolute -bottom-40 -left-24 h-96 w-96 rounded-full bg-framboise-400/10 blur-3xl"
       />
       <Container size="wide" className="relative py-16 lg:py-20">
         <div className="grid items-end gap-10 lg:grid-cols-[1.6fr_1fr]">

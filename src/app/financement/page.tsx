@@ -93,9 +93,9 @@ export default function FinancementPage() {
               </p>
             </div>
 
-            <div className="rounded-3xl border border-mint-300 bg-mint-100/40 p-8">
+            <div className="rounded-3xl border border-framboise-300 bg-framboise-100/40 p-8">
               <BadgeCheck
-                className="h-8 w-8 text-mint-600"
+                className="h-8 w-8 text-framboise-600"
                 strokeWidth={1.5}
                 aria-hidden
               />

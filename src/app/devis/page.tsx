@@ -46,7 +46,7 @@ export default function DevisPage() {
                   />
                 </div>
                 <p className="mt-6 flex items-start gap-2.5 border-t border-white/10 pt-5 text-sm text-esme-100/70">
-                  <FileText className="mt-0.5 h-4 w-4 shrink-0 text-mint-400" strokeWidth={1.5} aria-hidden />
+                  <FileText className="mt-0.5 h-4 w-4 shrink-0 text-framboise-400" strokeWidth={1.5} aria-hidden />
                   Ces pièces constituent le dossier attendu par votre OPCO, par
                   France Travail ou par votre fonds d’assurance formation.
                 </p>
@@ -114,7 +114,7 @@ export default function DevisPage() {
               </div>
 
               <p className="flex items-start gap-2.5 text-xs leading-relaxed text-ink-500">
-                <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-mint-600" aria-hidden />
+                <CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-framboise-600" aria-hidden />
                 {catalogueStats.programCount} formations au catalogue, et un
                 dispositif sur-mesure dès que votre besoin sort du cadre.
               </p>

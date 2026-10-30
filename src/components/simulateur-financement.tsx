@@ -44,8 +44,8 @@ const pertinenceStyles: Record<
   { card: string; chip: string; Icon: typeof CheckCircle2 }
 > = {
   prioritaire: {
-    card: "border-mint-300 bg-mint-100/35",
-    chip: "bg-mint-400 text-esme-950",
+    card: "border-framboise-300 bg-framboise-100/35",
+    chip: "bg-framboise-400 text-esme-950",
     Icon: CheckCircle2,
   },
   possible: {
@@ -456,7 +456,7 @@ function OpcoFinder({
                   <span className="flex flex-wrap items-center gap-2">
                     <span className="font-semibold text-esme-900">{opco.name}</span>
                     {opco.esmeRelevance === "forte" ? (
-                      <span className="rounded-full bg-mint-100 px-2 py-0.5 text-[0.65rem] font-medium text-mint-800">
+                      <span className="rounded-full bg-framboise-100 px-2 py-0.5 text-[0.65rem] font-medium text-framboise-800">
                         Fréquent chez nos clients
                       </span>
                     ) : null}
@@ -496,7 +496,7 @@ function Results({
   return (
     <div>
       <div className="rounded-3xl bg-esme-950 p-7 text-esme-100 lg:p-9">
-        <p className="text-[0.7rem] font-semibold tracking-[0.14em] text-mint-300 uppercase">
+        <p className="text-[0.7rem] font-semibold tracking-[0.14em] text-framboise-300 uppercase">
           Votre orientation
         </p>
         <h2 className="mt-4 text-2xl font-semibold text-white sm:text-3xl">
@@ -526,7 +526,7 @@ function Results({
               href={opco.website}
               target="_blank"
               rel="noreferrer noopener"
-              className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-mint-300 hover:underline"
+              className="mt-3 inline-flex items-center gap-1.5 text-sm font-medium text-framboise-300 hover:underline"
             >
               {opco.website.replace("https://www.", "")}
               <ExternalLink className="h-3.5 w-3.5" aria-hidden />

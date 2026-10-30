@@ -60,7 +60,7 @@ export function ArticleBody({ blocks }: { blocks: Block[] }) {
               >
                 {block.items.map((item) => (
                   <div key={item.label}>
-                    <dt className="font-display text-3xl font-semibold text-mint-400">
+                    <dt className="font-display text-3xl font-semibold text-framboise-400">
                       {item.value}
                     </dt>
                     <dd className="mt-1.5 text-sm leading-relaxed text-esme-100/80">

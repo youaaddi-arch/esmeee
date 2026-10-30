@@ -152,8 +152,8 @@ export function RequestForm({
 
   if (status === "sent") {
     return (
-      <div className="rounded-2xl border border-mint-300 bg-mint-100/50 p-8 text-center">
-        <CheckCircle2 className="mx-auto h-10 w-10 text-mint-600" aria-hidden />
+      <div className="rounded-2xl border border-framboise-300 bg-framboise-100/50 p-8 text-center">
+        <CheckCircle2 className="mx-auto h-10 w-10 text-framboise-600" aria-hidden />
         <h2 className="mt-4 text-xl font-semibold text-esme-900">
           Votre demande est partie
         </h2>

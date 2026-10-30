@@ -46,7 +46,7 @@ export default function HomePage() {
         {/* Photo de campus en fond, très assombrie : elle apporte de la
             matière sans jamais disputer la lisibilité au texte. */}
         <Image
-          src="/photos/hero-campus.webp"
+          src="/photos/hero-transformation.webp"
           alt=""
           aria-hidden
           fill
@@ -65,7 +65,7 @@ export default function HomePage() {
         />
         <div
           aria-hidden
-          className="absolute -bottom-32 -left-20 h-96 w-96 rounded-full bg-mint-400/10 blur-3xl"
+          className="absolute -bottom-32 -left-20 h-96 w-96 rounded-full bg-framboise-400/10 blur-3xl"
         />
 
         <Container size="wide" className="relative py-20 lg:py-28">
@@ -77,7 +77,7 @@ export default function HomePage() {
               <h1 className="mt-6 max-w-2xl text-4xl leading-[1.05] font-semibold text-white sm:text-5xl lg:text-[3.5rem]">
                 Conduire les transformations complexes
               </h1>
-              <p className="mt-5 max-w-xl text-xl leading-relaxed text-mint-300">
+              <p className="mt-5 max-w-xl text-xl leading-relaxed text-framboise-300">
                 Les compétences pour décider, piloter et transformer.
               </p>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-esme-100/80">
@@ -96,11 +96,11 @@ export default function HomePage() {
 
               <p className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-esme-100/60">
                 <span className="inline-flex items-center gap-2">
-                  <BadgeCheck className="h-4 w-4 text-mint-400" aria-hidden />
+                  <BadgeCheck className="h-4 w-4 text-framboise-400" aria-hidden />
                   Certifié Qualiopi — actions de formation
                 </span>
                 <span className="inline-flex items-center gap-2">
-                  <Clock className="h-4 w-4 text-mint-400" aria-hidden />
+                  <Clock className="h-4 w-4 text-framboise-400" aria-hidden />
                   Formats de ½ journée à 10 jours
                 </span>
               </p>
@@ -109,7 +109,7 @@ export default function HomePage() {
             {/* Carte catalogue */}
             <div className="relative">
               <div className="rounded-3xl border border-white/10 bg-white/[0.04] p-7 backdrop-blur-sm">
-                <p className="text-[0.7rem] font-semibold tracking-[0.14em] text-mint-300 uppercase">
+                <p className="text-[0.7rem] font-semibold tracking-[0.14em] text-framboise-300 uppercase">
                   Le catalogue en bref
                 </p>
                 <dl className="mt-6 grid grid-cols-2 gap-x-6 gap-y-7 [&>div]:flex [&>div]:flex-col">
@@ -161,11 +161,11 @@ export default function HomePage() {
                           <span className="flex items-center gap-2.5 text-esme-100/85">
                             <DomainIcon
                               icon={domain.icon}
-                              className="h-4 w-4 text-mint-400"
+                              className="h-4 w-4 text-framboise-400"
                             />
                             {domain.name}
                           </span>
-                          <span className="shrink-0 font-mono text-xs text-esme-100/50 group-hover:text-mint-300">
+                          <span className="shrink-0 font-mono text-xs text-esme-100/50 group-hover:text-framboise-300">
                             {count}
                           </span>
                         </Link>
@@ -207,8 +207,8 @@ export default function HomePage() {
                 title={observatory.headline}
                 lead={`Nous avons interrogé ${observatory.sample}. Le constat n’est pas celui du déni, mais de la lucidité sans moyens.`}
               />
-              <figure className="mt-8 border-l-2 border-mint-400 pl-5">
-                <Quote className="h-5 w-5 text-mint-400" aria-hidden />
+              <figure className="mt-8 border-l-2 border-framboise-400 pl-5">
+                <Quote className="h-5 w-5 text-framboise-400" aria-hidden />
                 <blockquote className="mt-3">
                   <p className="font-display text-xl leading-snug font-medium text-esme-800">
                     Sommes-nous capables de faire évoluer les compétences aussi
@@ -352,13 +352,13 @@ export default function HomePage() {
                 key={format.slug}
                 className="rounded-2xl border border-white/10 bg-white/[0.04] p-7"
               >
-                <p className="font-mono text-xs text-mint-400">
+                <p className="font-mono text-xs text-framboise-400">
                   0{index + 1}
                 </p>
                 <h3 className="mt-3 text-xl font-semibold text-white">
                   {format.name}
                 </h3>
-                <p className="mt-1.5 text-sm font-medium text-mint-300">
+                <p className="mt-1.5 text-sm font-medium text-framboise-300">
                   {format.pitch}
                 </p>
                 <p className="mt-4 text-sm leading-relaxed text-esme-100/75">
@@ -383,8 +383,8 @@ export default function HomePage() {
       </Section>
 
       <ImageBand
-        src="/photos/band-collaboration.webp"
-        alt="Participants travaillant ensemble sur des indicateurs de performance énergétique"
+        src="/photos/band-numerique.webp"
+        alt=""
         eyebrow="Pédagogie active"
         title="On n'apprend pas un métier en salle de cours"
         lead="Études de cas réels, mises en situation, ateliers collaboratifs, travaux guidés sur poste et simulateurs : c'est la constante des 48 programmes."
@@ -472,8 +472,8 @@ export default function HomePage() {
 
             <div className="rounded-2xl border border-ink-200 bg-white p-7 shadow-card">
               <div className="flex items-start gap-4">
-                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-mint-100">
-                  <BadgeCheck className="h-5 w-5 text-mint-800" aria-hidden />
+                <span className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-framboise-100">
+                  <BadgeCheck className="h-5 w-5 text-framboise-800" aria-hidden />
                 </span>
                 <div>
                   <h3 className="text-lg font-semibold text-esme-900">

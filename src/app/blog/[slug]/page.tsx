@@ -103,7 +103,7 @@ export default async function ArticlePage({
             </p>
             <dl className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-esme-100/60">
               <div className="flex items-center gap-2">
-                <CalendarDays className="h-4 w-4 text-mint-400" aria-hidden />
+                <CalendarDays className="h-4 w-4 text-framboise-400" aria-hidden />
                 <dt className="sr-only">Publié le</dt>
                 <dd>
                   <time dateTime={article.date}>
@@ -112,7 +112,7 @@ export default async function ArticlePage({
                 </dd>
               </div>
               <div className="flex items-center gap-2">
-                <Clock className="h-4 w-4 text-mint-400" aria-hidden />
+                <Clock className="h-4 w-4 text-framboise-400" aria-hidden />
                 <dt className="sr-only">Temps de lecture</dt>
                 <dd>{article.readingMinutes} min de lecture</dd>
               </div>

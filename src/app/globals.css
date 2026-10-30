@@ -1,52 +1,56 @@
 @import "tailwindcss";
 
-/* ──────────────────────────────────────────────────────────────────────────
-   ESME Executive Education — jetons de design
-   Palette reprise de la charte ESME (esme.fr) : bleu ESME, bleu profond,
-   bleu électrique et vert d'accent.
-   ────────────────────────────────────────────────────────────────────────── */
-
 @theme {
-  /* Marque */
-  --color-esme-50: #f2f7ff;
-  --color-esme-100: #dff3fd;
-  --color-esme-200: #d4e3ff;
-  --color-esme-300: #a9c6ff;
-  --color-esme-400: #4486ff;
-  --color-esme-500: #2466d8;
-  --color-esme-600: #17418f;
-  --color-esme-700: #123472;
-  --color-esme-800: #0a1b3c;
-  --color-esme-900: #062050;
-  --color-esme-950: #03142f;
+  /* Couleurs principales — charte ESME Executive Education */
+  --color-esme-50: #f3f6fc;
+  --color-esme-100: #e4ecf8;
+  --color-esme-200: #d1d9e8;  /* secondaire charte */
+  --color-esme-300: #a8bde0;
+  --color-esme-400: #5b86cc;
+  --color-esme-500: #2a5aa8;
+  --color-esme-600: #174290;  /* BLEU ESME */
+  --color-esme-700: #173877;
+  --color-esme-800: #162259;  /* secondaire charte */
+  --color-esme-900: #111b45;
+  --color-esme-950: #0b1230;
 
-  /* Accent */
-  --color-mint-100: #d6fbef;
-  --color-mint-300: #7cecc8;
-  --color-mint-400: #2ed9a3;
-  --color-mint-600: #17aa7c;
-  --color-mint-800: #0c5f45;
+  /* Accent — FRAMBOISE */
+  --color-framboise-50: #fdf2f7;
+  --color-framboise-100: #fce4ee;
+  --color-framboise-200: #f8c8dc;
+  --color-framboise-300: #f4abbf;  /* secondaire charte */
+  --color-framboise-400: #eb63a0;  /* FRAMBOISE */
+  --color-framboise-500: #d94a8b;
+  --color-framboise-600: #be3a74;
+  --color-framboise-700: #9c2e5f;
+  --color-framboise-800: #6a2b62;  /* prune, secondaire charte */
+
+  /* Secondaires charte */
+  --color-violet-700: #3d276e;
+  --color-mauve-400: #a879b4;
+  --color-creme-100: #fbf4ee;
+  --color-creme-200: #f4e4d9;
 
   /* Neutres */
   --color-ink-50: #f7f8fb;
   --color-ink-100: #eef1f6;
-  --color-ink-200: #e8ecf4;
-  --color-ink-300: #cfd6e4;
-  --color-ink-400: #9aa5bd;
-  --color-ink-500: #6b7691;
-  --color-ink-600: #4d5771;
-  --color-ink-700: #333c54;
-  --color-ink-800: #1f2638;
-  --color-ink-900: #121725;
+  --color-ink-200: #e2e8f2;
+  --color-ink-300: #cbd4e4;
+  --color-ink-400: #94a0ba;
+  --color-ink-500: #67738f;
+  --color-ink-600: #4a5570;
+  --color-ink-700: #313a53;
+  --color-ink-800: #1e2538;
+  --color-ink-900: #111726;
 
-  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
-  --font-display: var(--font-inter-tight), var(--font-inter), ui-sans-serif, sans-serif;
+  --font-sans: var(--font-kumbh), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-kumbh), ui-sans-serif, system-ui, sans-serif;
 
   --radius-xs: 0.25rem;
   --radius-4xl: 2rem;
 
-  --shadow-card: 0 1px 2px rgb(6 32 80 / 0.04), 0 8px 24px -12px rgb(6 32 80 / 0.14);
-  --shadow-lift: 0 2px 4px rgb(6 32 80 / 0.06), 0 18px 40px -18px rgb(6 32 80 / 0.22);
+  --shadow-card: 0 1px 2px rgb(17 27 69 / 0.04), 0 8px 24px -12px rgb(17 27 69 / 0.14);
+  --shadow-lift: 0 2px 4px rgb(17 27 69 / 0.06), 0 18px 40px -18px rgb(17 27 69 / 0.22);
 
   --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -81,7 +85,6 @@
     background: var(--page);
     color: var(--page-ink);
     font-family: var(--font-sans);
-    font-feature-settings: "cv05" 1, "ss03" 1;
     text-rendering: optimizeLegibility;
   }
 
@@ -128,8 +131,8 @@
 
   .bg-grid-ink {
     background-image:
-      linear-gradient(to right, rgb(6 32 80 / 0.05) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(6 32 80 / 0.05) 1px, transparent 1px);
+      linear-gradient(to right, rgb(17 27 69 / 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(17 27 69 / 0.05) 1px, transparent 1px);
     background-size: 56px 56px;
   }
 
@@ -169,7 +172,7 @@
     width: 0.4rem;
     height: 0.4rem;
     border-radius: 9999px;
-    background: var(--color-mint-400);
+    background: var(--color-framboise-400);
   }
   .prose-esme strong {
     color: var(--color-esme-900);
@@ -181,7 +184,7 @@
     text-underline-offset: 3px;
   }
   .prose-esme blockquote {
-    border-left: 3px solid var(--color-mint-400);
+    border-left: 3px solid var(--color-framboise-400);
     padding-left: 1.25rem;
     font-style: italic;
     color: var(--color-esme-800);

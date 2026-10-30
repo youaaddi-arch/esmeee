@@ -64,7 +64,7 @@ export function Eyebrow({
     <p
       className={cx(
         "flex items-center gap-2.5 text-[0.7rem] font-semibold tracking-[0.14em] uppercase",
-        tone === "dark" ? "text-esme-500" : "text-mint-300",
+        tone === "dark" ? "text-esme-500" : "text-framboise-300",
         className,
       )}
     >
@@ -72,7 +72,7 @@ export function Eyebrow({
         aria-hidden
         className={cx(
           "h-px w-6",
-          tone === "dark" ? "bg-esme-300" : "bg-mint-400/60",
+          tone === "dark" ? "bg-esme-300" : "bg-framboise-400/60",
         )}
       />
       {children}
@@ -140,7 +140,7 @@ const buttonTones: Record<ButtonTone, string> = {
   primary:
     "bg-esme-600 text-white hover:bg-esme-700 shadow-[0_1px_2px_rgb(6_32_80/0.2)]",
   secondary:
-    "bg-mint-400 text-esme-950 hover:bg-mint-300 font-semibold",
+    "bg-framboise-400 text-esme-950 hover:bg-framboise-300 font-semibold",
   ghost:
     "border border-ink-300 bg-white text-esme-700 hover:border-esme-400 hover:text-esme-600",
   light: "bg-white text-esme-700 hover:bg-esme-50",
@@ -228,7 +228,7 @@ export function Badge({
   const tones = {
     neutral: "bg-ink-100 text-ink-600",
     brand: "bg-esme-100 text-esme-700",
-    mint: "bg-mint-100 text-mint-800",
+    mint: "bg-framboise-100 text-framboise-800",
     warn: "bg-amber-50 text-amber-800",
     light: "bg-white/10 text-esme-100 ring-1 ring-white/15",
   } as const;
@@ -284,7 +284,7 @@ export function Stat({
       <p
         className={cx(
           "font-display text-4xl font-semibold tracking-tight sm:text-5xl",
-          tone === "light" ? "text-mint-400" : "text-esme-600",
+          tone === "light" ? "text-framboise-400" : "text-esme-600",
         )}
       >
         {value}
@@ -330,7 +330,7 @@ export function BulletList({
         <li key={item} className="flex gap-3">
           <span
             aria-hidden
-            className="mt-[0.5em] h-1.5 w-1.5 shrink-0 rounded-full bg-mint-400"
+            className="mt-[0.5em] h-1.5 w-1.5 shrink-0 rounded-full bg-framboise-400"
           />
           <span
             className={cx(

@@ -73,7 +73,7 @@ export default function EquipePage() {
 
                 {person.quote ? (
                   <figure className="mt-6 border-t border-ink-200 pt-5">
-                    <Quote className="h-4 w-4 text-mint-400" aria-hidden />
+                    <Quote className="h-4 w-4 text-framboise-400" aria-hidden />
                     <blockquote className="mt-2.5">
                       <p className="text-sm leading-relaxed text-esme-800 italic">
                         « {person.quote} »
@@ -175,8 +175,8 @@ export default function EquipePage() {
       </Section>
 
       <ImageBand
-        src="/photos/band-atelier.webp"
-        alt="Ingénieurs au travail dans un laboratoire de robotique et de systèmes embarqués de l’ESME"
+        src="/photos/band-ondes.webp"
+        alt=""
         eyebrow="Nos intervenants"
         title="Ils exercent le métier qu’ils enseignent"
         lead="Experts d’assurance du secteur énergétique, ingénieurs de bureau d’études, praticiens de l’IA et de la cybersécurité, dirigeants expérimentés, comédiens-formateurs."
@@ -208,7 +208,7 @@ export default function EquipePage() {
           <ul className="mt-14 grid gap-6 border-t border-white/10 pt-12 lg:grid-cols-3">
             {commitments.map((item) => (
               <li key={item.title}>
-                <h3 className="text-sm font-semibold tracking-[0.1em] text-mint-300 uppercase">
+                <h3 className="text-sm font-semibold tracking-[0.1em] text-framboise-300 uppercase">
                   {item.title}
                 </h3>
                 <p className="mt-3 text-sm leading-relaxed text-esme-100/75">

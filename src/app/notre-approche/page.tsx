@@ -70,7 +70,7 @@ export default function ApprochePage() {
             </div>
 
             <div className="self-start rounded-3xl bg-esme-950 p-8 text-esme-100">
-              <p className="text-[0.7rem] font-semibold tracking-[0.12em] text-mint-300 uppercase">
+              <p className="text-[0.7rem] font-semibold tracking-[0.12em] text-framboise-300 uppercase">
                 Observatoire {observatory.year}
               </p>
               <dl className="mt-6 space-y-6">
@@ -155,8 +155,8 @@ export default function ApprochePage() {
       </Section>
 
       <ImageBand
-        src="/photos/band-atelier.webp"
-        alt="Travaux pratiques sur machines professionnelles dans un atelier de l’ESME"
+        src="/photos/band-ondes.webp"
+        alt=""
         eyebrow="Active learning"
         title="Transformer les acquis en réflexes durables"
         lead="Chaque formation se conclut par une évaluation individuelle des acquis, puis par un accompagnement destiné à faciliter la mise en pratique dans l’organisation."
@@ -176,7 +176,7 @@ export default function ApprochePage() {
               <li key={item.title} className="flex gap-5">
                 <span
                   aria-hidden
-                  className="font-display text-2xl font-semibold text-mint-400"
+                  className="font-display text-2xl font-semibold text-framboise-400"
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>

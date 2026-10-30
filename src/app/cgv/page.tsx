@@ -70,7 +70,7 @@ export default function CgvPage() {
                         >
                           <span
                             aria-hidden
-                            className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-mint-400"
+                            className="mt-[0.55em] h-1.5 w-1.5 shrink-0 rounded-full bg-framboise-400"
                           />
                           <span>{paragraph.text}</span>
                         </p>

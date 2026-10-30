@@ -15,7 +15,7 @@ export function SiteFooter() {
         <div className="grid gap-12 lg:grid-cols-[1.3fr_2.7fr]">
           <div>
             <Link href="/" className="inline-block text-white">
-              <EsmeLogo tone="light" />
+              <EsmeLogo tone="light" size="lg" />
             </Link>
             <p className="mt-5 max-w-sm text-sm leading-relaxed text-esme-100/70">
               {site.tagline}. {site.baseline} {catalogueStats.programCount}{" "}
@@ -26,19 +26,19 @@ export function SiteFooter() {
             <ul className="mt-6 space-y-3 text-sm">
               <li>
                 <a
-                  className="inline-flex items-center gap-2.5 transition-colors hover:text-mint-300"
+                  className="inline-flex items-center gap-2.5 transition-colors hover:text-framboise-300"
                   href={`tel:${contact.phone}`}
                 >
-                  <Phone className="h-4 w-4 text-mint-400" aria-hidden />
+                  <Phone className="h-4 w-4 text-framboise-400" aria-hidden />
                   {contact.phoneDisplay}
                 </a>
               </li>
               <li>
                 <a
-                  className="inline-flex items-center gap-2.5 transition-colors hover:text-mint-300"
+                  className="inline-flex items-center gap-2.5 transition-colors hover:text-framboise-300"
                   href={`mailto:${contact.email}`}
                 >
-                  <Mail className="h-4 w-4 text-mint-400" aria-hidden />
+                  <Mail className="h-4 w-4 text-framboise-400" aria-hidden />
                   {contact.email}
                 </a>
               </li>
@@ -47,7 +47,7 @@ export function SiteFooter() {
                   key={place.label}
                   className="flex items-start gap-2.5 text-esme-100/70"
                 >
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-mint-400" aria-hidden />
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-framboise-400" aria-hidden />
                   <span>
                     {place.street}
                     <br />
@@ -57,12 +57,12 @@ export function SiteFooter() {
               ))}
               <li>
                 <a
-                  className="inline-flex items-center gap-2.5 transition-colors hover:text-mint-300"
+                  className="inline-flex items-center gap-2.5 transition-colors hover:text-framboise-300"
                   href={contact.linkedin}
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  <Linkedin className="h-4 w-4 text-mint-400" aria-hidden />
+                  <Linkedin className="h-4 w-4 text-framboise-400" aria-hidden />
                   LinkedIn
                 </a>
               </li>
@@ -72,7 +72,7 @@ export function SiteFooter() {
           <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
             {footerNav.map((group) => (
               <nav key={group.title} aria-label={group.title}>
-                <h2 className="text-[0.7rem] font-semibold tracking-[0.14em] text-mint-300 uppercase">
+                <h2 className="text-[0.7rem] font-semibold tracking-[0.14em] text-framboise-300 uppercase">
                   {group.title}
                 </h2>
                 <ul className="mt-4 space-y-2.5">

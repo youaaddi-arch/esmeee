@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { contact, site } from "@/data/site";
 import { RequestForm } from "@/components/request-form";
@@ -28,43 +27,6 @@ export default function ContactPage() {
         lead="Notre équipe vous accompagne et vous conseille dans la construction de projets de formation adaptés à vos enjeux. Une question sur un programme, un format, un financement : nous répondons sous deux jours ouvrés."
       />
 
-      {/* Galerie des campus */}
-      <Section className="py-12 sm:py-14">
-        <Container size="wide">
-          <ul className="grid grid-cols-2 gap-4 lg:grid-cols-4">
-            {[
-              { src: "/photos/campus-paris.webp", label: "Campus Paris", alt: "Le campus parisien de l’ESME et ses espaces extérieurs" },
-              { src: "/photos/campus-ivry.webp", label: "Campus Ivry-sur-Seine", alt: "Le bâtiment du campus d’Ivry-sur-Seine" },
-              { src: "/photos/campus-lille.webp", label: "Campus Lille", alt: "La façade du campus lillois de l’ESME" },
-              { src: "/photos/campus-bordeaux.webp", label: "Campus Bordeaux", alt: "Le campus bordelais de l’ESME" },
-            ].map((place) => (
-              <li key={place.label} className="group relative overflow-hidden rounded-2xl">
-                <div className="relative aspect-[3/4]">
-                  <Image
-                    src={place.src}
-                    alt={place.alt}
-                    fill
-                    sizes="(min-width: 1024px) 25vw, 50vw"
-                    className="object-cover transition-transform duration-700 ease-[var(--ease-out-soft)] group-hover:scale-[1.05]"
-                  />
-                  <div
-                    aria-hidden
-                    className="absolute inset-0 bg-gradient-to-t from-esme-950/85 via-esme-950/15 to-transparent"
-                  />
-                </div>
-                <p className="absolute right-4 bottom-4 left-4 text-sm font-semibold text-white">
-                  {place.label}
-                </p>
-              </li>
-            ))}
-          </ul>
-          <p className="mt-4 text-xs text-ink-500">
-            Les formations inter-entreprises se tiennent sur nos campus ; l’intra
-            et le sur-mesure, sur votre site ou chez nous, au choix.
-          </p>
-        </Container>
-      </Section>
-
       <Section className="py-14 sm:py-16">
         <Container size="wide">
           <div className="grid gap-12 lg:grid-cols-[1fr_1.4fr] lg:gap-16">
@@ -74,16 +36,16 @@ export default function ContactPage() {
                 <Eyebrow tone="light">Contact direct</Eyebrow>
                 <a
                   href={`tel:${contact.phone}`}
-                  className="mt-5 flex items-center gap-3 font-display text-2xl font-semibold text-white transition-colors hover:text-mint-300"
+                  className="mt-5 flex items-center gap-3 font-display text-2xl font-semibold text-white transition-colors hover:text-framboise-300"
                 >
-                  <Phone className="h-5 w-5 text-mint-400" strokeWidth={1.5} aria-hidden />
+                  <Phone className="h-5 w-5 text-framboise-400" strokeWidth={1.5} aria-hidden />
                   {contact.phoneDisplay}
                 </a>
                 <a
                   href={`mailto:${contact.email}`}
-                  className="mt-4 flex items-center gap-3 text-sm transition-colors hover:text-mint-300"
+                  className="mt-4 flex items-center gap-3 text-sm transition-colors hover:text-framboise-300"
                 >
-                  <Mail className="h-4 w-4 shrink-0 text-mint-400" strokeWidth={1.5} aria-hidden />
+                  <Mail className="h-4 w-4 shrink-0 text-framboise-400" strokeWidth={1.5} aria-hidden />
                   <span className="break-all">{contact.email}</span>
                 </a>
               </div>

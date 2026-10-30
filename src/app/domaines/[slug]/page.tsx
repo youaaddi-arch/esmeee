@@ -80,7 +80,7 @@ export default async function DomainPage({
           <div className="grid gap-12 lg:grid-cols-[1.5fr_1fr]">
             <div>
               <span className="inline-flex h-12 w-12 items-center justify-center rounded-xl bg-white/10 ring-1 ring-white/15">
-                <DomainIcon icon={domain.icon} className="h-6 w-6 text-mint-400" />
+                <DomainIcon icon={domain.icon} className="h-6 w-6 text-framboise-400" />
               </span>
               <Eyebrow tone="light" className="mt-6">
                 {domain.name}
@@ -124,7 +124,7 @@ export default async function DomainPage({
               </dl>
 
               <div className="rounded-2xl border border-white/10 bg-white/[0.04] p-6">
-                <p className="text-[0.7rem] font-semibold tracking-[0.12em] text-mint-300 uppercase">
+                <p className="text-[0.7rem] font-semibold tracking-[0.12em] text-framboise-300 uppercase">
                   Ce que vos équipes sauront faire
                 </p>
                 <div className="mt-4">

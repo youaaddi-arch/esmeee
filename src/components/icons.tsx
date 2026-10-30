@@ -26,10 +26,10 @@ export const accentClasses: Record<
   { chip: string; bar: string; text: string; ring: string }
 > = {
   teal: {
-    chip: "bg-mint-100 text-mint-800",
-    bar: "bg-mint-400",
-    text: "text-mint-800",
-    ring: "ring-mint-300",
+    chip: "bg-framboise-100 text-framboise-800",
+    bar: "bg-framboise-400",
+    text: "text-framboise-800",
+    ring: "ring-framboise-300",
   },
   indigo: {
     chip: "bg-indigo-50 text-indigo-800",
@@ -54,36 +54,26 @@ export const accentClasses: Record<
 export function EsmeLogo({
   className,
   tone = "dark",
+  size = "md",
 }: {
   className?: string;
   tone?: "dark" | "light";
+  size?: "md" | "lg";
 }) {
+  // Deux déclinaisons de la charte : lettrage bleu sur fond clair, réserve
+  // blanche sur fond sombre. La hauteur passe par une prop afin d'éviter deux
+  // utilitaires de hauteur concurrents sur la même image.
+  const src =
+    tone === "light" ? "/brand/esme-exed-blanc.png" : "/brand/esme-exed.png";
+  const height = size === "lg" ? "h-20" : "h-14";
   return (
-    <span className={`flex items-center gap-3 ${className ?? ""}`}>
-      <Image
-        src="/brand/esme-mark.png"
-        alt="ESME"
-        width={512}
-        height={512}
-        priority
-        className="h-10 w-10 shrink-0 rounded-[0.35rem]"
-      />
-      <span className="flex flex-col leading-none">
-        <span
-          className={`font-display text-[0.95rem] font-bold tracking-tight ${
-            tone === "light" ? "text-white" : "text-esme-900"
-          }`}
-        >
-          Executive Education
-        </span>
-        <span
-          className={`mt-1 text-[0.6rem] font-semibold tracking-[0.16em] uppercase ${
-            tone === "light" ? "text-mint-300" : "text-esme-500"
-          }`}
-        >
-          Formation continue
-        </span>
-      </span>
-    </span>
+    <Image
+      src={src}
+      alt="ESME Executive Education"
+      width={823}
+      height={1123}
+      priority
+      className={`${height} w-auto ${className ?? ""}`}
+    />
   );
 }

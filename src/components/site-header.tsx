@@ -39,24 +39,24 @@ export function SiteHeader() {
         <Container size="wide">
           <div className="flex h-9 items-center justify-between text-xs">
             <p className="flex items-center gap-2">
-              <span className="inline-block h-1.5 w-1.5 rounded-full bg-mint-400" />
+              <span className="inline-block h-1.5 w-1.5 rounded-full bg-framboise-400" />
               La formation continue de l’ESME · Organisme certifié Qualiopi
             </p>
             <div className="flex items-center gap-5">
               <a
-                className="transition-colors hover:text-mint-300"
+                className="transition-colors hover:text-framboise-300"
                 href={`tel:${contact.phone}`}
               >
                 {contact.phoneDisplay}
               </a>
               <a
-                className="transition-colors hover:text-mint-300"
+                className="transition-colors hover:text-framboise-300"
                 href={`mailto:${contact.email}`}
               >
                 {contact.email}
               </a>
               <a
-                className="transition-colors hover:text-mint-300"
+                className="transition-colors hover:text-framboise-300"
                 href={contact.esmeSite}
                 target="_blank"
                 rel="noreferrer noopener"
@@ -69,7 +69,7 @@ export function SiteHeader() {
       </div>
 
       <Container size="wide">
-        <div className="flex h-18 items-center justify-between gap-6">
+        <div className="flex h-20 items-center justify-between gap-6">
           <Link
             href="/"
             className="shrink-0 text-esme-900"

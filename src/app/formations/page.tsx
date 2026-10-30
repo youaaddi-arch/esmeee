@@ -57,7 +57,7 @@ export default function FormationsPage() {
           {facts.map((fact) => (
             <div key={fact.value} className="flex items-start gap-3">
               <fact.icon
-                className="mt-0.5 h-5 w-5 shrink-0 text-mint-400"
+                className="mt-0.5 h-5 w-5 shrink-0 text-framboise-400"
                 strokeWidth={1.5}
                 aria-hidden
               />

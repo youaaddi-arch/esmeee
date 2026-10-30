@@ -1,18 +1,13 @@
 import type { Metadata } from "next";
-import { Inter, Inter_Tight } from "next/font/google";
+import { Kumbh_Sans } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { contact, site } from "@/data/site";
 import "./globals.css";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const interTight = Inter_Tight({
-  variable: "--font-inter-tight",
+// Kumbh Sans : la typographie de la charte ESME Executive Education.
+const kumbhSans = Kumbh_Sans({
+  variable: "--font-kumbh",
   subsets: ["latin"],
   display: "swap",
 });
@@ -77,7 +72,7 @@ export default function RootLayout({
   return (
     <html
       lang="fr"
-      className={`${inter.variable} ${interTight.variable} h-full antialiased`}
+      className={`${kumbhSans.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-white">
         <a

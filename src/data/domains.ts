@@ -69,7 +69,7 @@ export const domains: Domain[] = [
     accent: "teal",
     icon: "bolt",
     photo: "/photos/domaine-energies.webp",
-    photoAlt: "Équipe projet analysant des données de production énergétique autour d'une maquette d'éolienne",
+    photoAlt: "Représentation d’un atome, symbole de l’énergie et de la physique appliquée",
     catalogPage: 10,
   },
   {
@@ -95,7 +95,7 @@ export const domains: Domain[] = [
     accent: "indigo",
     icon: "cog",
     photo: "/photos/domaine-industrie.webp",
-    photoAlt: "Machine de découpe numérique en fonctionnement dans un atelier de fabrication",
+    photoAlt: "Robot industriel et ingénieur travaillant côte à côte sur une ligne de production",
     catalogPage: 24,
   },
   {
@@ -126,7 +126,7 @@ export const domains: Domain[] = [
     accent: "blue",
     icon: "chip",
     photo: "/photos/domaine-numerique.webp",
-    photoAlt: "Deux ingénieurs dans un laboratoire de robotique et de systèmes embarqués de l'ESME",
+    photoAlt: "Main robotique épurée, symbole de l’intelligence artificielle",
     catalogPage: 30,
   },
   {
@@ -172,7 +172,7 @@ export const domains: Domain[] = [
     accent: "rose",
     icon: "compass",
     photo: "/photos/domaine-management.webp",
-    photoAlt: "Dirigeants réunis lors de la signature d'un partenariat entre l'ESME et une entreprise industrielle",
+    photoAlt: "Ondes colorées entrelacées, image du changement et des flux à conduire",
     catalogPage: 42,
   },
 ];

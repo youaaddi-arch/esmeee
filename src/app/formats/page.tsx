@@ -131,7 +131,7 @@ export default function FormatsPage() {
               >
                 <span
                   aria-hidden
-                  className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-mint-400 font-mono text-xs font-bold text-esme-950"
+                  className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-framboise-400 font-mono text-xs font-bold text-esme-950"
                 >
                   {String(index + 1).padStart(2, "0")}
                 </span>
