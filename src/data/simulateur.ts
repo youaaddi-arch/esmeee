@@ -1,5 +1,5 @@
 import { fundingRoutes, type FundingRoute } from "./financement";
-import type { OpcoId } from "./opco";
+import { opcoById, type OpcoId } from "./opco";
 import {
   statutDispositif,
   type AnneeFormation,
@@ -91,7 +91,39 @@ export type CompanyInput = {
   opco: OpcoId | null;
   /** L'année de déroulement change l'état des enveloppes. */
   annee: AnneeFormation;
+  /**
+   * Convention collective ou branche. C'est elle qui fixe les barèmes à
+   * l'intérieur d'un même OPCO, et qui ouvre certains soutiens conventionnels.
+   */
+  branche?: string;
 };
+
+const normalise = (value: string) =>
+  value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[’']/g, " ")
+    .toLowerCase();
+
+/**
+ * Repère si la branche déclarée bénéficie, chez cet OPCO, d'un soutien
+ * conventionnel complémentaire publié.
+ */
+function matchBrancheSoutien(
+  opcoId: OpcoId | null,
+  branche?: string,
+): string | null {
+  if (!opcoId || !branche || branche.trim().length < 3) return null;
+  const opco = opcoById(opcoId);
+  const listes = opco?.dispositifs?.flatMap((d) => d.branchesSoutien ?? []) ?? [];
+  const needle = normalise(branche.trim());
+  return (
+    listes.find((b) => {
+      const hay = normalise(b);
+      return hay.includes(needle) || needle.includes(normalise(b.split("(")[0].trim()));
+    }) ?? null
+  );
+}
 
 const route = (slug: string): FundingRoute => {
   const found = fundingRoutes.find((r) => r.slug === slug);
@@ -100,7 +132,7 @@ const route = (slug: string): FundingRoute => {
 };
 
 export function recommendForCompany(input: CompanyInput): Recommendation[] {
-  const { size, headcount, context, opco, annee } = input;
+  const { size, headcount, context, opco, annee, branche } = input;
   const petite = sousLeSeuilDe50(size);
   const recos: Recommendation[] = [];
 
@@ -120,12 +152,15 @@ export function recommendForCompany(input: CompanyInput): Recommendation[] {
   });
 
   // Les leviers qui prennent le relais au-delà du seuil de 50 salariés.
+  const soutienBranche = matchBrancheSoutien(opco, branche);
   recos.push({
     route: route("contributions-conventionnelles"),
-    pertinence: petite ? "possible" : "prioritaire",
-    reason: petite
-      ? "Si votre branche a instauré une contribution conventionnelle, elle s'ajoute aux fonds mutualisés et finance des actions fléchées par la commission paritaire."
-      : "C'est le levier le plus souvent ignoré des entreprises de votre taille, et précisément celui qui prend le relais des fonds mutualisés. Vérifiez si votre convention collective en a institué une.",
+    pertinence: soutienBranche || !petite ? "prioritaire" : "possible",
+    reason: soutienBranche
+      ? `Votre branche — ${soutienBranche} — figure parmi celles auxquelles votre OPCO réserve un soutien conventionnel complémentaire, au-delà de 50 salariés. C'est un levier identifié, pas une hypothèse : demandez-en le barème à votre conseiller.`
+      : petite
+        ? "Si votre branche a instauré une contribution conventionnelle, elle s'ajoute aux fonds mutualisés et finance des actions fléchées par la commission paritaire."
+        : "C'est le levier le plus souvent ignoré des entreprises de votre taille, et précisément celui qui prend le relais des fonds mutualisés. Vérifiez si votre convention collective en a institué une.",
   });
 
   recos.push({
@@ -136,29 +171,21 @@ export function recommendForCompany(input: CompanyInput): Recommendation[] {
       : "Exclu des fonds mutualisés du plan, vous pouvez néanmoins confier un budget à un OPCO — y compris un autre que le vôtre — pour le gérer et le flécher. C'est aussi par là que se finance la contrepartie des dispositifs cofinancés.",
   });
 
-  if (context === "transformation" || context === "difficulte") {
-    recos.push({
-      route: route("fse-plus"),
-      pertinence: "possible",
-      reason:
-        "Votre projet relève d'une mutation : c'est le terrain du cofinancement européen. Il ne se demande jamais seul, il abonde une action collective ouverte par votre OPCO — demandez lesquelles le sont.",
-    });
-    recos.push({
-      route: route("fne-formation"),
-      pertinence: "non-applicable",
-      reason:
-        opco === "opco2i"
-          ? "La ligne budgétaire nationale du FNE est fermée. OPCO 2i porte toutefois son propre cofinancement de type FNE, Transitions Industrie, détaillé plus bas : interrogez votre conseiller sur le millésime en cours."
-          : "La ligne budgétaire nationale du FNE est fermée. Certains OPCO portent des cofinancements de même nature sous leur propre nom : posez la question à votre conseiller.",
-    });
-  } else {
-    recos.push({
-      route: route("fne-formation"),
-      pertinence: "non-applicable",
-      reason:
-        "Le FNE supposait une mutation documentée ou une difficulté économique, et sa ligne budgétaire est de toute façon fermée.",
-    });
-  }
+  // Le FSE+ a remplacé le FNE-Formation et ignore le seuil des 50 salariés :
+  // c'est souvent le meilleur levier quand l'enveloppe du plan est épuisée.
+  recos.push({
+    route: route("fse-plus"),
+    pertinence:
+      context === "transformation" || context === "difficulte"
+        ? "prioritaire"
+        : "possible",
+    reason:
+      context === "transformation" || context === "difficulte"
+        ? petite
+          ? "C'est votre meilleure carte. Le FSE+ a pris la suite du FNE-Formation, il vise précisément les formations de transformation, et il ne connaît pas le seuil des 50 salariés. Chez certains OPCO, une entreprise de votre taille atteint 100 % de prise en charge. En revanche il impose ses règles : quatorze heures minimum, pas de e-learning, pas de formation interne, et aucun autre financement public par-dessus."
+          : "Le FSE+ a pris la suite du FNE-Formation et, contrairement aux fonds mutualisés du plan, il reste ouvert au-delà de 50 salariés — en général à hauteur de la moitié des coûts pédagogiques. C'est la voie la plus solide pour une entreprise de votre taille engagée dans une mutation."
+        : "Le FSE+ finance les formations qui accompagnent une transformation. Votre contexte n'est pas décrit comme tel, mais si le projet s'y rattache — transition numérique, écologique ou démographique — il mérite d'être posé à votre conseiller : il ignore le seuil des 50 salariés.",
+  });
 
   if (context === "recrutement") {
     recos.push({

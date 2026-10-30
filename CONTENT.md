@@ -136,6 +136,21 @@ relèvent de votre ligne éditoriale.
 - [ ] **Politique de confidentialité** : les mentions légales y renvoient via
       celle de l'ESME. Ajoutez une page dédiée si nécessaire.
 
+## Veille financement
+
+`src/data/financement-actualite.ts` et `src/data/opco.ts` portent une veille
+datée, relue chaque lundi par une tâche planifiée qui ouvre une pull request
+en brouillon. Trois règles tiennent ce travail :
+
+- aucun montant sans sa source et sa date de relevé ;
+- une information invérifiable se signale comme telle, elle ne se devine pas ;
+- `veille.verifieeLe` se met à jour à chaque passage, même sans changement.
+
+État au 30 octobre 2026 : le FNE-Formation est fermé depuis 2025 et le FSE+ lui
+a succédé ; l'enveloppe nationale du plan pour les moins de 50 salariés est
+tombée de 550 à 521 M€ et s'épuise avant la fin de l'exercice ; le projet de loi
+de finances 2027 ramène à zéro la dotation de l'État à France compétences.
+
 ## Mettre à jour le catalogue
 
 Au prochain catalogue, voir `scripts/README.md`. Les tables à reprendre à la

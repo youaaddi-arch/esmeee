@@ -14,6 +14,8 @@ export const veille = {
   /** Date de la dernière vérification des informations de ce module. */
   verifieeLe: "2026-10-30",
   verifieeLeTexte: "30 octobre 2026",
+  /** Enveloppe nationale du plan de développement des compétences, moins de 50 salariés. */
+  enveloppePlanNational: { "2025": "550 M€", "2026": "521 M€" },
 } as const;
 
 export type Statut = "ouvert" | "sous-reserve" | "epuise" | "ferme";
@@ -63,12 +65,12 @@ export const statutsDispositifs: StatutParAnnee[] = [
   },
   {
     slug: "opco",
-    statut: { "2026": "sous-reserve", "2027": "sous-reserve" },
+    statut: { "2026": "epuise", "2027": "sous-reserve" },
     note: {
       "2026":
-        "Les fonds mutualisés du plan de développement des compétences sont réservés aux entreprises de moins de 50 salariés. Les enveloppes sont annuelles et peuvent s'épuiser en cours d'exercice : plusieurs OPCO appliquent alors une minoration du taux de prise en charge.",
+        "L'enveloppe nationale du plan pour les moins de 50 salariés est passée de 550 M€ en 2025 à 521 M€ en 2026, et elle se distribue au premier arrivé, premier servi. À cette période de l'année, elle est épuisée chez la plupart des opérateurs : plusieurs signalent un épuisement dès le troisième trimestre. Les dates limites de dépôt tombent — 30 novembre 2026 chez OPCO EP, sous réserve de fonds disponibles ; 15 janvier 2027 chez OPCO Mobilités pour les seules formations démarrant entre le 15 et le 31 décembre 2026. Selon les opérateurs, un dossier refusé faute de fonds peut être reporté sur l'exercice suivant.",
       "2027":
-        "Le projet de loi de finances pour 2027 ramène à zéro la dotation de l'État à France compétences et ne reconduit pas la compensation de TVA aux OPCO, d'environ 160 M€. Les critères 2027 seront arrêtés en fin d'année 2026 par les conseils d'administration : déposez tôt et n'anticipez pas les taux de 2026.",
+        "Les enveloppes rouvrent avec le nouvel exercice, en janvier. C'est la fenêtre à viser : les fonds partent vite et s'épuisent souvent avant l'automne. Deux réserves toutefois : le projet de loi de finances ramène à zéro la dotation de l'État à France compétences et ne reconduit pas la compensation de TVA aux OPCO, d'environ 160 M€. Les critères et les taux 2027 sont arrêtés en fin d'année 2026 par les conseils d'administration : n'anticipez pas ceux de 2026.",
     },
     source: {
       label: "Annexe « Formation professionnelle » au projet de loi de finances",
@@ -76,27 +78,13 @@ export const statutsDispositifs: StatutParAnnee[] = [
     },
   },
   {
-    slug: "fne-formation",
-    statut: { "2026": "ferme", "2027": "ferme" },
-    note: {
-      "2026":
-        "Le FNE-Formation a été suspendu au titre de l'exercice 2025 et n'est pas rétabli en 2026 : aucune nouvelle convention n'est signée avec les OPCO. Le dispositif n'est pas abrogé, mais il n'a plus de ligne budgétaire. Les conventions antérieures se poursuivent jusqu'à leur terme.",
-      "2027":
-        "Aucun rétablissement n'est prévu à ce stade. Les entreprises en transformation se reportent sur les enveloppes thématiques des OPCO — intelligence artificielle, cybersécurité, transition écologique — et sur les actions collectives.",
-    },
-    source: {
-      label: "Annexe « Formation professionnelle » au projet de loi de finances 2026",
-      url: "https://www.assemblee-nationale.fr/dyn/contenu/visualisation/1089989/file/7-Jaune2026_Formation_Professionnelle.pdf",
-    },
-  },
-  {
     slug: "fse-plus",
-    statut: { "2026": "epuise", "2027": "sous-reserve" },
+    statut: { "2026": "ouvert", "2027": "ouvert" },
     note: {
       "2026":
-        "Les crédits de la programmation en cours ont été largement engagés et les principaux appels se sont clos au 30 juin 2026. Une réouverture dépend de chaque OPCO : certains ont porté des enveloppes dédiées, jusqu'à 7 M€ pour OPCO EP sur 2025-2026.",
+        "Le FSE+ a pris la place du FNE-Formation, dont la ligne budgétaire est fermée depuis 2025. C'est aujourd'hui le principal cofinancement des formations de transformation. Il ne connaît pas le seuil des 50 salariés : chez OPCO EP, les entreprises de moins de 50 salariés peuvent atteindre 100 % de prise en charge — 50 % FSE+ et 50 % fonds propres de l'OPCO — et celles de 50 salariés et plus 50 %. En contrepartie, il impose ses propres règles : durée minimale de quatorze heures, exclusion du e-learning, des formations internes et des obligations de sécurité, et aucun autre cofinancement public ne peut s'y ajouter.",
       "2027":
-        "Dernière année de la programmation 2021-2027. Des appels peuvent rouvrir, toujours sous forme d'actions collectives et non de demandes individuelles. À surveiller auprès de votre OPCO dès le premier trimestre.",
+        "Dernière année de la programmation 2021-2027, et la fenêtre reste ouverte : chez OPCO EP, les actions peuvent se dérouler jusqu'au 31 décembre 2027, avec un dossier au conseiller au plus tard le 29 octobre 2027. Chaque OPCO fixe son calendrier et son enveloppe : la demande se cale toujours avant le démarrage.",
     },
     source: { label: "fse.gouv.fr", url: "https://fse.gouv.fr/quest-ce-que-le-fse" },
   },

@@ -108,30 +108,6 @@ export const fundingRoutes: FundingRoute[] = [
       "Conditions générales de vente ESME Executive Education, article 9 — Financement par un organisme tiers",
   },
   {
-    slug: "fne-formation",
-    name: "FNE-Formation",
-    audiences: ["entreprise"],
-    summary:
-      "Un cofinancement de l’État, instruit par votre OPCO, destiné aux entreprises qui conduisent une mutation — transition écologique, transition numérique, difficultés économiques.",
-    covers: [
-      "Une part significative du coût pédagogique, modulée selon la taille de l’entreprise et la nature du projet",
-      "Des parcours collectifs sur des thématiques prioritaires de transition",
-    ],
-    conditions: [
-      "L’entreprise doit relever de l’un des cas d’ouverture de l’année en cours",
-      "Le projet doit s’inscrire dans une logique de transformation documentée, et non de simple maintien de poste",
-      "Les thématiques et taux de prise en charge sont redéfinis chaque année",
-    ],
-    steps: [
-      "Vérifiez auprès de votre OPCO les thématiques FNE ouvertes pour l’année",
-      "Construisons ensemble un parcours cohérent avec le projet de transformation",
-      "Déposez le dossier FNE auprès de votre OPCO avant tout démarrage",
-    ],
-    caveat:
-      "Les enveloppes FNE sont annuelles et limitées. Le dispositif se décide tôt dans l’année, pas au dernier trimestre.",
-    eligibility: "directe",
-  },
-  {
     slug: "cpf",
     name: "Compte personnel de formation",
     acronym: "CPF",
@@ -284,15 +260,17 @@ export const fundingRoutes: FundingRoute[] = [
     acronym: "FSE+",
     audiences: ["entreprise"],
     summary:
-      "Cofinancement européen des actions de formation, distribué en France par les OPCO et les Régions. Il ne se demande jamais seul : il vient abonder une action collective portée par un OPCO.",
+      "Le cofinancement européen des actions de formation, distribué en France par les OPCO et les Régions. Il a pris la suite du FNE-Formation, dont la ligne budgétaire est fermée depuis 2025, et il ignore le seuil des 50 salariés qui ferme les fonds mutualisés du plan.",
     covers: [
-      "Jusqu'à la moitié des coûts pédagogiques, selon les appels et les opérateurs",
-      "Des actions collectives construites par l'OPCO autour d'une thématique ou d'une filière",
+      "La moitié des coûts pédagogiques en règle générale, et jusqu'à la totalité pour les moins de 50 salariés chez les OPCO qui abondent sur leurs fonds propres",
+      "Des plafonds horaires : chez OPCO EP, 50 € par heure et par stagiaire sous 50 salariés, 25 € au-delà",
+      "Selon les dossiers, une rémunération forfaitaire du stagiaire",
     ],
     conditions: [
-      "S'inscrire dans une action collective ouverte par votre OPCO : une demande individuelle n'est pas recevable",
-      "L'organisme de formation doit être certifié Qualiopi",
-      "Sont exclues les formations obligatoires de sécurité ou réglementaires, les formations internes et, selon les appels, les formats asynchrones",
+      "Un échange préalable avec votre conseiller OPCO ouvre le droit au financement",
+      "Une durée minimale, souvent quatorze heures, et une thématique qui entre dans les axes de l'appel",
+      "Sont exclus le e-learning, les formations internes, l'AFEST, les obligations de sécurité, les bilans de compétences, la VAE et le CACES",
+      "Aucun autre cofinancement public, CPF compris, ne peut s'y ajouter ; le reste à charge se règle par versement volontaire",
     ],
     steps: [
       "Demandez à votre conseiller OPCO quelles actions collectives cofinancées sont ouvertes",
@@ -300,7 +278,7 @@ export const fundingRoutes: FundingRoute[] = [
       "Déposez le dossier dans le calendrier de l'appel, toujours avant le démarrage",
     ],
     caveat:
-      "La programmation 2021-2027 arrive à son terme et les principaux appels se sont clos à la mi-2026. Une réouverture dépend de chaque OPCO et se décide en début d'exercice.",
+      "Les règles sont propres à chaque OPCO et à chaque millésime : taux, plafonds, axes thématiques et calendrier. Chez OPCO EP, les actions peuvent se dérouler jusqu'au 31 décembre 2027 ; chez OPCO 2i, la campagne publiée est échue. Vérifiez le millésime en cours avant de bâtir un plan de financement.",
     eligibility: "conditionnelle",
     source: "fse.gouv.fr et appels à projets des OPCO",
   },

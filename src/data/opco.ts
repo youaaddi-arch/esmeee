@@ -56,6 +56,12 @@ export type OpcoDispositif = {
   thematiques?: string[];
   /** Exclusions explicites. */
   exclusions?: string[];
+  /** Plafonds publiés, par tranche d'effectif. */
+  plafonds?: { tranche: string; plafond: string }[];
+  /** Conditions d'éligibilité propres au dispositif. */
+  conditions?: string[];
+  /** Branches bénéficiant d'un soutien conventionnel complémentaire. */
+  branchesSoutien?: string[];
   /** Calendrier publié ; souvent propre à une campagne annuelle. */
   calendrier?: string;
   /** Mise en garde sur l'actualité du dispositif. */
@@ -97,6 +103,31 @@ export const opcos: Opco[] = [
     esmeRelevance: "forte",
     note: "C'est l'OPCO de la majorité de nos clients en Énergies & Services et en Industrie. Il dispose d'enveloppes dédiées aux transitions énergétique et numérique.",
     dispositifs: [
+      {
+        nom: "FSE+ — Fonds social européen",
+        resume:
+          "Cofinancement européen des formations qui accompagnent la mutation industrielle, ouvert à toutes les entreprises du champ OPCO 2i quelle que soit leur taille, pour les salariés en CDI comme en CDD.",
+        taux: [{ tranche: "Toutes tailles", taux: "50 % des coûts pédagogiques" }],
+        thematiques: [
+          "Formations liées aux stratégies de transformation, en particulier les transitions numérique et écologique",
+          "Sécurisation des parcours des salariés les plus exposés à ces transformations",
+        ],
+        exclusions: [
+          "Formations internes",
+          "Formations relevant de l'obligation de sécurité de l'employeur",
+          "Entreprises éligibles au Fonds de transition juste, qui doivent mobiliser ce cofinancement-là",
+        ],
+        conditions: [
+          "Le reste à charge se finance par versement volontaire ou par les fonds de branche",
+          "La demande se dépose sur Mon Compte 2i, suffisamment en amont pour que la délégation régionale puisse l'instruire",
+        ],
+        calendrier:
+          "La campagne publiée couvre des formations se déroulant entre le 07/02/2025 et le 31/12/2025.",
+        vigilance:
+          "Les dates de la campagne publiée sont échues : demandez à votre conseiller le millésime en cours avant de bâtir un plan de financement dessus.",
+        url: "https://www.opco2i.fr/formation-et-financement/subventions/fse-fond-social-europeen/",
+        releveLe: "2026-10-30",
+      },
       {
         nom: "Transitions Industrie",
         resume:
@@ -220,6 +251,57 @@ export const opcos: Opco[] = [
     criteresAcces: "par-branche",
     esmeRelevance: "moyenne",
     note: "Concerne les cabinets d'architectes et de géomètres, ainsi que les artisans installateurs du secteur énergétique.",
+    dispositifs: [
+      {
+        nom: "FSE+ — Fonds social européen",
+        resume:
+          "Le dispositif le plus détaillé du marché, ouvert à toutes les entreprises du champ OPCO EP sans critère de taille, en métropole comme dans les DROM. Tous les salariés sont éligibles, alternants compris. Publics prioritaires : les 45 ans et plus, les moins de 26 ans et les salariés en situation de handicap.",
+        taux: [
+          { tranche: "Moins de 50 salariés", taux: "jusqu'à 100 %" },
+          { tranche: "50 salariés et plus", taux: "jusqu'à 50 %" },
+        ],
+        plafonds: [
+          { tranche: "Moins de 50 salariés", plafond: "50 € / heure / stagiaire, dans la limite de 2 500 € par jour" },
+          { tranche: "50 salariés et plus", plafond: "25 € / heure / stagiaire, dans la limite de 1 250 € par jour" },
+        ],
+        thematiques: [
+          "Formations certifiantes et qualifiantes, hors obligation de l'employeur",
+          "Transition écologique et énergétique",
+          "Transition numérique",
+          "Transition démographique",
+          "RSE, qualité de vie au travail et égalité professionnelle",
+          "Mixité des métiers",
+          "Réapprentissage des savoirs fondamentaux",
+          "Formations préparant les Jeux olympiques 2030",
+        ],
+        exclusions: [
+          "E-learning",
+          "Formations internes et AFEST",
+          "Formations relevant de l'obligation de formation et de sécurité de l'employeur",
+          "Bilans de compétences, VAE et CACES",
+        ],
+        conditions: [
+          "Durée minimale de quatorze heures",
+          "Un échange préalable avec votre conseiller est nécessaire pour ouvrir le droit au financement",
+          "Aucun autre cofinancement public, CPF compris, ne peut compléter la prise en charge",
+          "Le reste à charge se règle par versement volontaire",
+          "Une rémunération forfaitaire de 12 € HT de l'heure par stagiaire peut être accordée selon le dossier",
+        ],
+        branchesSoutien: [
+          "Maintenance et distribution de matériels agricoles, de travaux publics, de bâtiment et de manutention (SDLM)",
+          "Mareyage",
+          "Avocats salariés",
+          "Cabinets d'expertise automobile",
+          "Entreprises d'architecture",
+        ],
+        calendrier:
+          "Les actions doivent être terminées au 31/12/2027. Dossier complet auprès du conseiller au plus tard le 29/10/2027, dépôt en ligne au plus tard le 05/11/2027. La demande précède toujours le démarrage.",
+        vigilance:
+          "Les financements sont accordés dans la limite des fonds disponibles. Toute annulation ou tout changement de stagiaire ou de dates après validation doit être signalé au plus tard la veille du démarrage.",
+        url: "https://www.opcoep.fr/fonds-social-europeen",
+        releveLe: "2026-10-30",
+      },
+    ],
   },
   {
     id: "opcommerce",

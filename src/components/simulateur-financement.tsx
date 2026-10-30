@@ -165,6 +165,7 @@ function CompanyFlow() {
   const [context, setContext] = useState<CompanyContext | null>(null);
   const [opco, setOpco] = useState<OpcoId | null>(null);
   const [annee, setAnnee] = useState<AnneeFormation>("2026");
+  const [branche, setBranche] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
   const complete = size && headcount && context;
@@ -172,10 +173,10 @@ function CompanyFlow() {
     () =>
       complete
         ? sortRecommendations(
-            recommendForCompany({ size, headcount, context, opco, annee }),
+            recommendForCompany({ size, headcount, context, opco, annee, branche }),
           )
         : [],
-    [complete, size, headcount, context, opco, annee],
+    [complete, size, headcount, context, opco, annee, branche],
   );
 
   if (submitted && complete) {
@@ -188,6 +189,7 @@ function CompanyFlow() {
           headcountLabels[headcount],
           companyContextLabels[context],
           anneeLabels[annee],
+          ...(branche.trim() ? [branche.trim()] : []),
         ]}
         onReset={() => {
           setSubmitted(false);
@@ -195,6 +197,7 @@ function CompanyFlow() {
           setHeadcount(null);
           setContext(null);
           setOpco(null);
+          setBranche("");
         }}
       />
     );
@@ -252,6 +255,24 @@ function CompanyFlow() {
         hint="Facultatif. Si vous l'ignorez, cherchez votre secteur ci-dessous : nous vous proposerons l'OPCO le plus probable, à confirmer auprès de votre service RH."
       >
         <OpcoFinder value={opco} onChange={setOpco} />
+      </Question>
+
+      <Question
+        step={6}
+        label="Quelle est votre convention collective ?"
+        hint="Facultatif, mais c'est elle qui fixe les barèmes à l'intérieur d'un même OPCO — et qui ouvre certains soutiens conventionnels réservés à quelques branches."
+      >
+        <label className="sr-only" htmlFor="branche">
+          Votre branche ou convention collective
+        </label>
+        <input
+          id="branche"
+          type="text"
+          value={branche}
+          onChange={(e) => setBranche(e.target.value)}
+          placeholder="Bureaux d'études techniques, métallurgie, architecture…"
+          className="w-full rounded-xl border border-ink-300 bg-white px-4 py-3 text-sm text-ink-800 placeholder:text-ink-400 focus:border-esme-400 focus:outline-none"
+        />
       </Question>
 
       <div className="border-t border-ink-200 pt-6">
@@ -635,6 +656,50 @@ function Results({
                       </li>
                     ))}
                   </ul>
+                </div>
+              ) : null}
+
+              {d.plafonds?.length ? (
+                <dl className="mt-4 space-y-2">
+                  {d.plafonds.map((pl) => (
+                    <div
+                      key={pl.tranche}
+                      className="flex flex-wrap justify-between gap-2 rounded-xl bg-white p-3 text-sm"
+                    >
+                      <dt className="text-ink-500">{pl.tranche}</dt>
+                      <dd className="font-medium text-esme-900">{pl.plafond}</dd>
+                    </div>
+                  ))}
+                </dl>
+              ) : null}
+
+              {d.conditions?.length ? (
+                <div className="mt-4">
+                  <p className="mb-2 text-[0.7rem] font-semibold tracking-[0.12em] text-ink-500 uppercase">
+                    Conditions
+                  </p>
+                  <ul className="space-y-1.5">
+                    {d.conditions.map((c) => (
+                      <li key={c} className="flex gap-2.5 text-sm text-ink-600">
+                        <span
+                          aria-hidden
+                          className="mt-[0.5em] h-1.5 w-1.5 shrink-0 rounded-full bg-esme-400"
+                        />
+                        {c}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null}
+
+              {d.branchesSoutien?.length ? (
+                <div className="mt-4 rounded-xl bg-white p-4">
+                  <p className="text-[0.7rem] font-semibold tracking-[0.12em] text-ink-500 uppercase">
+                    Soutien conventionnel complémentaire, au-delà de 50 salariés
+                  </p>
+                  <p className="mt-2 text-sm leading-relaxed text-ink-600">
+                    {d.branchesSoutien.join(" · ")}
+                  </p>
                 </div>
               ) : null}
 
